@@ -1,0 +1,28 @@
+style:
+  NewLineAtEndOfFile:
+    active: false
+  MaxLineLength:
+    maxLineLength: 300
+  WildcardImport:
+    active: false
+  ReturnCount:
+    max: 3
+complexity:
+  NestedBlockDepth:
+    threshold: 10
+  TooManyFunctions:
+    thresholdInClasses: 40
+    thresholdInFiles: 25
+    thresholdInInterfaces: 20
+    thresholdInObjects: 20
+  ComplexMethod:
+    ignoreSimpleWhenEntries: true
+performance:
+  SpreadOperator:
+    active: false
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+naming:
+  PackageNaming:
+    packagePattern: '[a-z]+(\.[a-z][A-Za-z0-9_]*)*'

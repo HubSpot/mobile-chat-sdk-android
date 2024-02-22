@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="Base.Theme.DemoApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+    </style>
+
+    <style name="Theme.DemoApp" parent="Base.Theme.DemoApp" />
+
+</resources>

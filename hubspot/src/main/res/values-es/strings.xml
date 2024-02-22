@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  strings.xml
+  Hubspot Mobile SDK
+
+  Copyright (c) 2024 Hubspot, Inc.
+  -->
+<resources>
+    <string name="start_chat">Comenzar chat</string>
+    <string name="default_error_msg">Algo salió mal</string>
+    <string name="label_there_is_an_issue_with_the_network_connection">Por favor verifique su conexión a Internet e inténtelo nuevamente.</string>
+</resources>

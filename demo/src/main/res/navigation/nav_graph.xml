@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.demo.MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_go_to_custom_button"
+            app:destination="@id/fragment_custom_button" />
+        <action
+            android:id="@+id/action_go_to_floating_button"
+            app:destination="@id/fragment_floating_button" />
+
+        <action
+            android:id="@+id/action_go_to_toolbar"
+            app:destination="@id/fragment_toolbar" />
+
+        <action
+            android:id="@+id/action_go_to_setting"
+            app:destination="@id/fragment_setting" />
+        <action
+            android:id="@+id/action_go_to_custom_property"
+            app:destination="@id/fragment_custom_property" />
+        <action
+            android:id="@+id/action_go_to_custom_chat_flow"
+            app:destination="@id/fragment_custom_chat_flow" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_custom_button"
+        android:name="com.example.demo.custombutton.CustomButtonFragment"
+        tools:layout="@layout/fragment_custom_button" />
+    <fragment
+        android:id="@+id/fragment_floating_button"
+        android:name="com.example.demo.floatingbutton.FloatingButtonFragment"
+        tools:layout="@layout/fragment_floating_button">
+        <action
+            android:id="@+id/action_go_to_regular_fab"
+            app:destination="@id/fragment_regular_fab" />
+        <action
+            android:id="@+id/action_go_to_mini_fab"
+            app:destination="@id/fragment_mini_fab" />
+        <action
+            android:id="@+id/action_go_to_extended_fab"
+            app:destination="@id/fragment_extended_fab" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_regular_fab"
+        android:name="com.example.demo.floatingbutton.RegularFloatingButtonFragment"
+        tools:layout="@layout/fragment_regular_floating_action_button" />
+
+    <fragment
+        android:id="@+id/fragment_mini_fab"
+        android:name="com.example.demo.floatingbutton.MiniFloatingButtonFragment"
+        tools:layout="@layout/fragment_mini_floating_action_button" />
+
+    <fragment
+        android:id="@+id/fragment_extended_fab"
+        android:name="com.example.demo.floatingbutton.ExtendedFloatingButtonFragment"
+        tools:layout="@layout/fragment_extended_floating_action_button" />
+
+    <fragment
+        android:id="@+id/fragment_toolbar"
+        android:name="com.example.demo.navbar.ToolBarFragment"
+        tools:layout="@layout/fragment_custom_toolbar">
+        <action
+            android:id="@+id/action_ToolbarFragment_to_MainFragment"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_fab_button"
+        android:name="com.example.demo.bottomnavigation.FABFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_fab" />
+
+    <fragment
+        android:id="@+id/navigation_webview"
+        android:name="com.example.demo.bottomnavigation.WebviewFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_webview" />
+
+    <fragment
+        android:id="@+id/fragment_setting"
+        android:name="com.example.demo.setting.SettingFragment"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/fragment_custom_property"
+        android:name="com.example.demo.customproperty.CustomPropertyFragment"
+        android:label="CustomPropertyFragment" />
+    <fragment
+        android:id="@+id/fragment_custom_chat_flow"
+        android:name="com.example.demo.customchatflow.CustomChatFlowFragment"
+        android:label="CustomChatFlowFragment" />
+
+</navigation>
