@@ -45,6 +45,7 @@ subprojects {
         suppressObviousFunctions.set(true)
         suppressInheritedMembers.set(false)
         offlineMode.set(false)
+        outputDirectory.set(rootDir.resolve("docs"))
         dokkaSourceSets {
             moduleName.set("HubspotMobile SDK")
             configureEach {

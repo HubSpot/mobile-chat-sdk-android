@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ChatPropertyKey</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+<link href="../../../images/hubspot-logo.png">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            HubspotMobile SDK
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":hubspot:dokkaHtml/release">androidJvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="HubspotMobile SDK::com.hubspot.mobilesdk.metadata/ChatPropertyKey///PointingToDeclaration//1148551639">
+  <div class="breadcrumbs"><a href="../../../index.html">HubspotMobile SDK</a><span class="delimiter">/</span><a href="../index.html">com.hubspot.mobilesdk.metadata</a><span class="delimiter">/</span><span class="current">ChatPropertyKey</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Chat</span><wbr></wbr><span>Property</span><wbr></wbr><span><span>Key</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="index.html">ChatPropertyKey</a></div><p class="paragraph">Defines keys for all device specific metadata information. These properties are automatically collected by the sdk before uploading it to Hubspot server</p><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-device-model/index.html">DeviceModel</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-operating-system-version/index.html">OperatingSystemVersion</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-screen-resolution/index.html">ScreenResolution</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-screen-size/index.html">ScreenSize</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-device-orientation/index.html">DeviceOrientation</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-app-version/index.html">AppVersion</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-battery-level/index.html">BatteryLevel</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-camera-permissions/index.html">CameraPermissions</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-photo-permissions/index.html">PhotoPermissions</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-notification-permissions/index.html">NotificationPermissions</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-location-permissions/index.html">LocationPermissions</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-platform/index.html">Platform</a></div></span></div><div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-903046760%2FClasslikes%2F1148551639" anchor-label="AppVersion" id="-903046760%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-app-version/index.html"><span>App</span><wbr></wbr><span><span>Version</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-903046760%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-app-version/index.html">AppVersion</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets current version of the application using this SDK</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2085480424%2FClasslikes%2F1148551639" anchor-label="BatteryLevel" id="-2085480424%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-battery-level/index.html"><span>Battery</span><wbr></wbr><span><span>Level</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2085480424%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-battery-level/index.html">BatteryLevel</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets battery level of the device</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="892521012%2FClasslikes%2F1148551639" anchor-label="CameraPermissions" id="892521012%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-camera-permissions/index.html"><span>Camera</span><wbr></wbr><span><span>Permissions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="892521012%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-camera-permissions/index.html">CameraPermissions</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets camera permissions</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2113611808%2FClasslikes%2F1148551639" anchor-label="DeviceModel" id="-2113611808%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-device-model/index.html"><span>Device</span><wbr></wbr><span><span>Model</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2113611808%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-device-model/index.html">DeviceModel</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets the the model of the device</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-248910567%2FClasslikes%2F1148551639" anchor-label="DeviceOrientation" id="-248910567%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-device-orientation/index.html"><span>Device</span><wbr></wbr><span><span>Orientation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-248910567%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-device-orientation/index.html">DeviceOrientation</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets screen orientation for the device</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-840051132%2FClasslikes%2F1148551639" anchor-label="LocationPermissions" id="-840051132%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-location-permissions/index.html"><span>Location</span><wbr></wbr><span><span>Permissions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-840051132%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-location-permissions/index.html">LocationPermissions</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets location permissions</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1302353030%2FClasslikes%2F1148551639" anchor-label="NotificationPermissions" id="-1302353030%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-notification-permissions/index.html"><span>Notification</span><wbr></wbr><span><span>Permissions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1302353030%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-notification-permissions/index.html">NotificationPermissions</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets notifications permissions</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="201299271%2FClasslikes%2F1148551639" anchor-label="OperatingSystemVersion" id="201299271%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-operating-system-version/index.html"><span>Operating</span><wbr></wbr><span>System</span><wbr></wbr><span><span>Version</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="201299271%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-operating-system-version/index.html">OperatingSystemVersion</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets the os version of the device</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2008779773%2FClasslikes%2F1148551639" anchor-label="PhotoPermissions" id="2008779773%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-photo-permissions/index.html"><span>Photo</span><wbr></wbr><span><span>Permissions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2008779773%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-photo-permissions/index.html">PhotoPermissions</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets photo permissions</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1169420188%2FClasslikes%2F1148551639" anchor-label="Platform" id="1169420188%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-platform/index.html"><span><span>Platform</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1169420188%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-platform/index.html">Platform</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets the platform</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="337646455%2FClasslikes%2F1148551639" anchor-label="ScreenResolution" id="337646455%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-screen-resolution/index.html"><span>Screen</span><wbr></wbr><span><span>Resolution</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="337646455%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-screen-resolution/index.html">ScreenResolution</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets the resolution for the device including height and width</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="444130114%2FClasslikes%2F1148551639" anchor-label="ScreenSize" id="444130114%2FClasslikes%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-screen-size/index.html"><span>Screen</span><wbr></wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="444130114%2FClasslikes%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">object </span><a href="-screen-size/index.html">ScreenSize</a> : <a href="index.html">ChatPropertyKey</a></div><div class="brief "><p class="paragraph">Gets diagonal screen size for the device</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-1708573188%2FProperties%2F1148551639" anchor-label="chatPropertyValue" id="-1708573188%2FProperties%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="chat-property-value.html"><span>chat</span><wbr></wbr><span>Property</span><wbr></wbr><span><span>Value</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1708573188%2FProperties%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="chat-property-value.html">chatPropertyValue</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span><br><div>Hubspot Mobile SDK</div><br><div>Copyright © 2024 Hubspot, Inc.</div><br></span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

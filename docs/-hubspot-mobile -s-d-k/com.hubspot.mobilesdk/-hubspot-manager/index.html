@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>HubspotManager</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+<link href="../../../images/hubspot-logo.png">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            HubspotMobile SDK
+                    </a>
+            </div>
+            <div class="library-version">
+            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":hubspot:dokkaHtml/release">androidJvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="HubspotMobile SDK::com.hubspot.mobilesdk/HubspotManager///PointingToDeclaration//1148551639">
+  <div class="breadcrumbs"><a href="../../../index.html">HubspotMobile SDK</a><span class="delimiter">/</span><a href="../index.html">com.hubspot.mobilesdk</a><span class="delimiter">/</span><span class="current">HubspotManager</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Hubspot</span><wbr></wbr><span><span>Manager</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">HubspotManager</a></div><p class="paragraph">HubspotManager class enable and disable logs @see <a href="enable-logs.html">enableLogs</a>& @see<a href="disable-logs.html">disableLogs</a> It manages the configuration changes from the assets file @see <a href="configure.html">configure</a> It also builds chatURL @see <span data-unresolved-link="com.hubspot.mobilesdk/HubspotManager/chatUrl/#/PointingToDeclaration/">chatUrl</span> It stores the email and token in memory @see <a href="set-user-identity.html">setUserIdentity</a> It sets chat properties for chat session @see <a href="get-chat-properties.html">getChatProperties</a>& @see <a href="set-chat-properties.html">setChatProperties</a> It sends the PushToken to Hubspot API @see <a href="set-push-token.html">setPushToken</a></p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="1664314408%2FProperties%2F1148551639" anchor-label="userIdentityEmail" id="1664314408%2FProperties%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="user-identity-email.html"><span>user</span><wbr></wbr><span>Identity</span><wbr></wbr><span><span>Email</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1664314408%2FProperties%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="user-identity-email.html">userIdentityEmail</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1183445099%2FProperties%2F1148551639" anchor-label="userIdentityToken" id="1183445099%2FProperties%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="user-identity-token.html"><span>user</span><wbr></wbr><span>Identity</span><wbr></wbr><span><span>Token</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1183445099%2FProperties%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="user-identity-token.html">userIdentityToken</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-1365398959%2FFunctions%2F1148551639" anchor-label="chatURL" id="-1365398959%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="chat-u-r-l.html"><span>chat</span><wbr></wbr><span><span>URL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1365398959%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="chat-u-r-l.html"><span class="token function">chatURL</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">chatFlow<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">pushData<span class="token operator">: </span><a href="../../com.hubspot.mobilesdk.firebase/-push-notification-chat-data/index.html">PushNotificationChatData</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Create chat URL for hubspot webview</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-719923691%2FFunctions%2F1148551639" anchor-label="configure" id="-719923691%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="configure.html"><span><span>configure</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-719923691%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="configure.html"><span class="token function">configure</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">It creates Hubspot configurations When user uses the demo app, it always call this method to configure with the hubspot sdk. This is the only method which is handled by the application.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1701188929%2FFunctions%2F1148551639" anchor-label="deleteDeviceToken" id="1701188929%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="delete-device-token.html"><span>delete</span><wbr></wbr><span>Device</span><wbr></wbr><span><span>Token</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1701188929%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="delete-device-token.html"><span class="token function">deleteDeviceToken</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pushToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">This method is used for deleting the push token via Hubspot API</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1734187548%2FFunctions%2F1148551639" anchor-label="disableLogs" id="-1734187548%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="disable-logs.html"><span>disable</span><wbr></wbr><span><span>Logs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1734187548%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="disable-logs.html"><span class="token function">disableLogs</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Disable the logs</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1992275821%2FFunctions%2F1148551639" anchor-label="enableLogs" id="1992275821%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="enable-logs.html"><span>enable</span><wbr></wbr><span><span>Logs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1992275821%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="enable-logs.html"><span class="token function">enableLogs</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Enable the logs</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1919948730%2FFunctions%2F1148551639" anchor-label="getChatProperties" id="1919948730%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-chat-properties.html"><span>get</span><wbr></wbr><span>Chat</span><wbr></wbr><span><span>Properties</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1919948730%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-chat-properties.html"><span class="token function">getChatProperties</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/HashMap.html">HashMap</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Getter method for the current chat session properties</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="500045749%2FFunctions%2F1148551639" anchor-label="logout" id="500045749%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="logout.html"><span><span>logout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="500045749%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="logout.html"><span class="token function">logout</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="266677346%2FFunctions%2F1148551639" anchor-label="setChatProperties" id="266677346%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-chat-properties.html"><span>set</span><wbr></wbr><span>Chat</span><wbr></wbr><span><span>Properties</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="266677346%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-chat-properties.html"><span class="token function">setChatProperties</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">keyValuePair<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets properties for current chat session</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2094352866%2FFunctions%2F1148551639" anchor-label="setPushToken" id="2094352866%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-push-token.html"><span>set</span><wbr></wbr><span>Push</span><wbr></wbr><span><span>Token</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2094352866%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="set-push-token.html"><span class="token function">setPushToken</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">pushToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">This method is used for sending the token via Hubspot API</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-145322503%2FFunctions%2F1148551639" anchor-label="setUserIdentity" id="-145322503%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-user-identity.html"><span>set</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Identity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-145322503%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set-user-identity.html"><span class="token function">setUserIdentity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">email<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">token<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Set the user identity token and email. These will be included when starting a chat session to identify the users. These values are only stored in memory and aren't persisted. These values are set when user use the setUserIdentity with passing email and token</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2007730337%2FFunctions%2F1148551639" anchor-label="startChat" id="2007730337%2FFunctions%2F1148551639" data-filterable-set=":hubspot:dokkaHtml/release"></a>
+          <div class="table-row" data-filterable-current=":hubspot:dokkaHtml/release" data-filterable-set=":hubspot:dokkaHtml/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start-chat.html"><span>start</span><wbr></wbr><span><span>Chat</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2007730337%2FFunctions%2F1148551639"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hubspot:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="start-chat.html"><span class="token function">startChat</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Shares the logs with chat started</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span><br><div>Hubspot Mobile SDK</div><br><div>Copyright © 2024 Hubspot, Inc.</div><br></span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
