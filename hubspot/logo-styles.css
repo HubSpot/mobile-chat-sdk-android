@@ -1,0 +1,20 @@
+
+/*
+ * All Margins and sizes are custom for the hubspot-logo.png file.
+ */
+:root {
+    --dokka-logo-image-url: url('../images/hubspot-logo.png');
+    --dokka-logo-height: 50px;
+    --dokka-logo-width: 50px;
+}
+
+/* link custom rules styles */
+.library-name--link {
+    /* ... */
+}
+
+/* logo custom rules styles */
+.library-name--link::before {
+    background-position: left;
+    width: 52px;
+}

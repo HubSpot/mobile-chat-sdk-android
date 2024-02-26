@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  colors.xml
+  Hubspot Mobile SDK
+
+  Copyright (c) 2024 Hubspot, Inc.
+  -->
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="orange">#f57722</color>
+</resources>
