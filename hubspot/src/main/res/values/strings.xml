@@ -6,9 +6,9 @@
   Copyright (c) 2024 Hubspot, Inc.
   -->
 <resources>
-    <string name="choose_file">Choose File</string>
+    <string name="choose_file" translatable="false">Choose File</string>
     <string name="start_chat">Start Chat</string>
     <string name="default_error_msg">Something went wrong</string>
     <string name="label_there_is_an_issue_with_the_network_connection">Please check your internet connection and try again.</string>
-    <string name="default_notification_channel_id">hubspot_channel_id</string>
+    <string name="default_notification_channel_id" translatable="false">hubspot_channel_id</string>
 </resources>

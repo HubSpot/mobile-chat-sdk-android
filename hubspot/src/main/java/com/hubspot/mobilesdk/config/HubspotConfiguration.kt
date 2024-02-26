@@ -6,6 +6,7 @@
  ************************************************/
 package com.hubspot.mobilesdk.config
 
+import androidx.annotation.Keep
 import com.hubspot.mobilesdk.config.HubspotConfig.Companion.defaultConfigFileName
 import kotlinx.serialization.Serializable
 import java.util.Locale
@@ -15,6 +16,7 @@ import java.util.Locale
  */
 sealed class HubspotEnvironment(open var env: String) {
     object QA : HubspotEnvironment("qa")
+
     object PRODUCTION : HubspotEnvironment("prod")
 }
 
@@ -77,12 +79,13 @@ sealed class HubspotConfigError : Throwable() {
     }
 }
 
+@Keep
 @Serializable
-data class HubspotConfig(
+internal data class HubspotConfig(
     val environment: String,
     val hublet: String,
     val portalId: String,
-    val defaultChatFlow: String
+    val defaultChatFlow: String,
 ) {
     /**
      * @suppress("NOT_DOCUMENTED")
