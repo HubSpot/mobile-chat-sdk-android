@@ -43,7 +43,6 @@ subprojects {
         moduleVersion.set(project.version.toString())
         failOnWarning.set(false)
         suppressObviousFunctions.set(true)
-        suppressInheritedMembers.set(false)
         offlineMode.set(false)
         outputDirectory.set(rootDir.resolve("docs"))
         dokkaSourceSets {

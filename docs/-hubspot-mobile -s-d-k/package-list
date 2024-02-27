@@ -5,12 +5,6 @@ $dokka.location:com.hubspot.mobilesdk.config/Hublet///PointingToDeclaration/-hu
 $dokka.location:com.hubspot.mobilesdk.config/Hublet/Hublet/#kotlin.String/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/-hublet.html
 $dokka.location:com.hubspot.mobilesdk.config/Hublet/appsSubDomain/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/apps-sub-domain.html
 $dokka.location:com.hubspot.mobilesdk.config/Hublet/id/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/id.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/HubspotConfig/#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/-hubspot-config.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/defaultChatFlow/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/default-chat-flow.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/environment/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/environment.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/hublet/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/hublet.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/portalId/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/portal-id.html
 $dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.AddNewDeviceTokenAPIFailure///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-add-new-device-token-a-p-i-failure/index.html
 $dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.AddNewDeviceTokenAPIFailure/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-add-new-device-token-a-p-i-failure/message.html
 $dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.DeleteDeviceTokenAPIFailure///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-delete-device-token-a-p-i-failure/index.html
