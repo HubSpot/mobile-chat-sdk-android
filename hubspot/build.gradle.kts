@@ -56,3 +56,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.firebase.messaging)
 }
+
+apply {
+    from("../publish-package.gradle")
+}
