@@ -13,6 +13,8 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.services)
+
+    id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
 android {
