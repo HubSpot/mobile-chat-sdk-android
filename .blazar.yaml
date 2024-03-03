@@ -6,13 +6,15 @@ buildDeps:
 buildType: CENTOS8
 
 env:
+  ANDROID_HOME: /usr/share/hubspot/android-sdk-linux
+  CI: true
   SHOULD_APPLY_USER_TO_COMMANDS: true  # Remove once Blazar applies this by default
 
 containers:
   - name: main
     securityContext: unprivileged
     user: hs-build
-    image: docker.hubteam.com/wailmer/blazar-executor-centos8:993
+    image: docker.hubteam.com/buildpacks/android-docker:644
 
 steps:
   - description: Build with gradle
