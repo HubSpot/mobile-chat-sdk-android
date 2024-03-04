@@ -69,4 +69,8 @@ sealed class ChatPropertyKey(val chatPropertyValue: String) {
      * Gets the platform
      */
     data object Platform : ChatPropertyKey(chatPropertyValue = "platform")
+    /**
+     * Gets the push token
+     */
+    data object PushToken : ChatPropertyKey(chatPropertyValue = "push_token")
 }

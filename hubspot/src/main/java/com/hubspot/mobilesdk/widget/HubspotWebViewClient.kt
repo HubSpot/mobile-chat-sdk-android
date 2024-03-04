@@ -14,7 +14,7 @@ import timber.log.Timber
 /**
  * HubspotWebViewClient class uses custom javascript and render the messages in the logs for the script
  */
-class HubspotWebViewClient : WebViewClient() {
+internal class HubspotWebViewClient : WebViewClient() {
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         injectJavaScript(view)

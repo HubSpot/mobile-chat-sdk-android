@@ -23,7 +23,7 @@ sealed class HubspotEnvironment(open var env: String) {
 /**
  * Hublet class represents the application sub domain based on Locale
  */
-data class Hublet(val id: String) {
+internal data class Hublet(val id: String) {
     private val defaultUS = "na1"
     val appsSubDomain: String
         get() {
@@ -38,7 +38,7 @@ data class Hublet(val id: String) {
 /**
  * Hubspot Configuration Error class represents different errors when missing properties
  */
-sealed class HubspotConfigError : Throwable() {
+internal sealed class HubspotConfigError : Throwable() {
     /**
      * Shows error when hublet id is missing
      */
