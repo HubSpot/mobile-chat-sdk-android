@@ -1,0 +1,26 @@
+buildDeps:
+  - hs-build-tools
+  - maven3
+  - node-20.11.0
+
+buildType: CENTOS8
+
+env:
+  ANDROID_HOME: /usr/share/hubspot/android-sdk-linux
+  CI: true
+  JAVA_HOME: /usr/java/temurinjdk17.0.8+7
+  SHOULD_APPLY_USER_TO_COMMANDS: true  # Remove once Blazar applies this by default
+
+containers:
+  - name: main
+    securityContext: unprivileged
+    user: hs-build
+    image: docker.hubteam.com/buildpacks/android-docker:644
+
+steps:
+  - description: Build with gradle
+    expandSegmentByDefault: true
+    container: main
+    commands:
+      - ./gradlew :hubspot:build --no-daemon --stacktrace --info
+
