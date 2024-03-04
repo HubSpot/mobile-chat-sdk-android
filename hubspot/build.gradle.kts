@@ -17,6 +17,10 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
+signing {
+    useGpgCmd()
+}
+
 android {
     namespace = "com.hubspot.mobilesdk"
 
