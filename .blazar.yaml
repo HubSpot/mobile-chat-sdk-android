@@ -22,5 +22,5 @@ steps:
     expandSegmentByDefault: true
     container: main
     commands:
-      - ./gradlew :hubspot:build --no-daemon --stacktrace --info
+      - ./gradlew :hubspot:build :hubspot:minifyReleaseWithR8 --no-daemon --stacktrace --info
 
