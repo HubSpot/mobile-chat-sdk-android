@@ -22,10 +22,10 @@ android {
         release {
             buildConfigField("Boolean", "DEBUG", "false")
             postprocessing {
-                proguardFile("proguard-rules.pro")
+                consumerProguardFile("consumer-rules.pro")
                 isRemoveUnusedCode = true
                 isOptimizeCode = true
-                isObfuscate = true
+                isObfuscate = false
             }
         }
 

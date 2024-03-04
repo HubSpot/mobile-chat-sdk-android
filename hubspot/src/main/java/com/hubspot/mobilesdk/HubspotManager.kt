@@ -186,6 +186,11 @@ class HubspotManager private constructor(private val context: Context) {
     }
 
     /**
+     * This method is used for getting a PushToken from the shared preferences
+     */
+    fun getPushToken() = hubspotPref.fcmToken.toString()
+
+    /**
      * This method is used for deleting the push token via Hubspot API
      * @param pushToken: It has FCM token
      **/

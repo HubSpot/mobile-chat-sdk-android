@@ -43,7 +43,8 @@ internal class CompileAndUploadMetaDataUseCase(
                 ChatPropertyKey.DeviceOrientation.chatPropertyValue to DeviceInformation.getScreenOrientation(context),
                 ChatPropertyKey.AppVersion.chatPropertyValue to DeviceInformation.getAppVersion(context),
                 ChatPropertyKey.BatteryLevel.chatPropertyValue to DeviceInformation.getBatteryLevel(context),
-                ChatPropertyKey.Platform.chatPropertyValue to "android"
+                ChatPropertyKey.Platform.chatPropertyValue to "android",
+                ChatPropertyKey.PushToken.chatPropertyValue to manager.getPushToken()
             )
         )
     }
