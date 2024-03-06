@@ -25,9 +25,7 @@ android {
             buildConfigField("Boolean", "DEBUG", "false")
             postprocessing {
                 consumerProguardFile("consumer-rules.pro")
-                isRemoveUnusedCode = true
-                isOptimizeCode = true
-                isObfuscate = false
+                isMinifyEnabled = false
             }
         }
 
