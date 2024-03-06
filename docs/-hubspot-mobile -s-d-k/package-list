@@ -1,29 +1,6 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:com.hubspot.mobilesdk.config////PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/index.html
-$dokka.location:com.hubspot.mobilesdk.config/Hublet///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/index.html
-$dokka.location:com.hubspot.mobilesdk.config/Hublet/Hublet/#kotlin.String/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/-hublet.html
-$dokka.location:com.hubspot.mobilesdk.config/Hublet/appsSubDomain/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/apps-sub-domain.html
-$dokka.location:com.hubspot.mobilesdk.config/Hublet/id/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hublet/id.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/HubspotConfig/#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/-hubspot-config.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/defaultChatFlow/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/default-chat-flow.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/environment/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/environment.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/hublet/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/hublet.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfig/portalId/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config/portal-id.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.AddNewDeviceTokenAPIFailure///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-add-new-device-token-a-p-i-failure/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.AddNewDeviceTokenAPIFailure/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-add-new-device-token-a-p-i-failure/message.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.DeleteDeviceTokenAPIFailure///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-delete-device-token-a-p-i-failure/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.DeleteDeviceTokenAPIFailure/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-delete-device-token-a-p-i-failure/message.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MetaDataAPIFailure///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-meta-data-a-p-i-failure/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MetaDataAPIFailure/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-meta-data-a-p-i-failure/message.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MissingEnvironment///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-missing-environment/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MissingEnvironment/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-missing-environment/message.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MissingHubletID///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-missing-hublet-i-d/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MissingHubletID/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-missing-hublet-i-d/message.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MissingPortalID///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-missing-portal-i-d/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError.MissingPortalID/message/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/-missing-portal-i-d/message.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotConfigError///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-config-error/index.html
 $dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment.PRODUCTION///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/-p-r-o-d-u-c-t-i-o-n/index.html
 $dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment.QA///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/-q-a/index.html
 $dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/index.html
@@ -57,6 +34,7 @@ $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.NotificationPermi
 $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.OperatingSystemVersion///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/-operating-system-version/index.html
 $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.PhotoPermissions///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/-photo-permissions/index.html
 $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.Platform///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/-platform/index.html
+$dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.PushToken///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/-push-token/index.html
 $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.ScreenResolution///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/-screen-resolution/index.html
 $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey.ScreenSize///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/-screen-size/index.html
 $dokka.location:com.hubspot.mobilesdk.metadata/ChatPropertyKey///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.metadata/-chat-property-key/index.html
@@ -95,9 +73,6 @@ $dokka.location:com.hubspot.mobilesdk.widget/HubspotFloatingActionButton/Hubspot
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/index.html
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView/HubspotWebView/#android.content.Context#android.util.AttributeSet?#kotlin.Int/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/-hubspot-web-view.html
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView/show/#kotlin.String?#com.hubspot.mobilesdk.firebase.PushNotificationChatData?/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/show.html
-$dokka.location:com.hubspot.mobilesdk.widget/HubspotWebViewClient///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view-client/index.html
-$dokka.location:com.hubspot.mobilesdk.widget/HubspotWebViewClient/HubspotWebViewClient/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view-client/-hubspot-web-view-client.html
-$dokka.location:com.hubspot.mobilesdk.widget/HubspotWebViewClient/onPageFinished/#android.webkit.WebView?#kotlin.String?/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view-client/on-page-finished.html
 $dokka.location:com.hubspot.mobilesdk////PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/index.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/index.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/chatURL/#kotlin.String?#com.hubspot.mobilesdk.firebase.PushNotificationChatData?/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/chat-u-r-l.html
@@ -106,6 +81,7 @@ $dokka.location:com.hubspot.mobilesdk/HubspotManager/deleteDeviceToken/#kotlin.S
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/disableLogs/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/disable-logs.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/enableLogs/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/enable-logs.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/getChatProperties/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-chat-properties.html
+$dokka.location:com.hubspot.mobilesdk/HubspotManager/getPushToken/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-push-token.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/logout/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/logout.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/setChatProperties/#kotlin.collections.Map[kotlin.String,kotlin.String]/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/set-chat-properties.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/setPushToken/#kotlin.String/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/set-push-token.html
