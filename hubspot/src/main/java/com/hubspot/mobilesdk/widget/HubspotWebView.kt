@@ -61,6 +61,12 @@ class HubspotWebView @JvmOverloads constructor(
         }
     }
 
+    /**
+     * This show method shows the ChatURL which updates the chatflow if it passes as an arguments
+     * It also manages the UserAgent for Mobile and integrated javascript for load the widget
+     * It embedded extra header for the language changes
+     * Finally, it load the URL including all the changes
+     */
     fun show(chatFlow: String? = null, pushData: PushNotificationChatData? = null) {
         this.hsThreadId = pushData?.threadId
         manager.configure()

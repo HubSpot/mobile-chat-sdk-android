@@ -33,13 +33,18 @@ class PushNotificationChatData(notificationData: Map<String, String>) : Serializ
     val threadId: String? = notificationData[threadIdKey]
     val chatflow: String? = notificationData[chatflowKey]
 
+    /**
+     * We want at least one key to be set, otherwise throw an IllegalArgumentException
+     */
     init {
-        // We want at least one key to be set, otherwise throw an IllegalArgumentException
         if (title == null && body == null && portalId == null && threadId == null && chatflow == null) {
             throw IllegalArgumentException("At least one key must be set")
         }
     }
 
+    /**
+     * @suppress("NOT_DOCUMENTED")
+     */
     companion object {
         const val titleKey = "hsTitle"
         const val bodyKey = "hsBody"
