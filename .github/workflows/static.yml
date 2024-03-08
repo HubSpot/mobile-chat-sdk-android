@@ -37,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: hubspot/build/dokka/html/
+          path: ${{ github.repository }}/docs
   deploy:
     needs: builddocs
     environment:

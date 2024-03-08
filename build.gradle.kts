@@ -34,9 +34,7 @@ subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_17.toString()
-            freeCompilerArgs = listOf(
-                "-Xstring-concat=inline"
-            )
+            freeCompilerArgs += listOf("-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi", "-Xstring-concat=inline")
         }
     }
 
@@ -46,7 +44,6 @@ subprojects {
         moduleVersion.set(project.version.toString())
         failOnWarning.set(false)
         suppressObviousFunctions.set(true)
-        suppressInheritedMembers.set(false)
         offlineMode.set(false)
         outputDirectory.set(rootDir.resolve("docs"))
         dokkaSourceSets {
