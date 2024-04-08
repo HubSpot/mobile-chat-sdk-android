@@ -19,6 +19,7 @@ plugins {
 }
 
 release {
+    failOnUnversionedFiles = false
     git {
         requireBranch.set("release")
     }
