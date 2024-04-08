@@ -15,6 +15,11 @@ plugins {
     alias(libs.plugins.google.services)
 
     id("com.vanniktech.maven.publish") version "0.27.0"
+    id("net.researchgate.release") version "3.0.2"
+}
+
+tasks.named("afterReleaseBuild") {
+    dependsOn("publish")
 }
 
 android {
