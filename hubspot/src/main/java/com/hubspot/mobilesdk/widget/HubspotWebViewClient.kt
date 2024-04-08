@@ -56,6 +56,9 @@ internal class HubspotWebViewClient : WebViewClient() {
             nativeApp.postMessage("info","Starting main load script");
             if (window.HubSpotConversations) {
                 configureHubspotConversations();
+            }
+            else if (Array.isArray(window.hsConversationsOnReady)) {
+                window.hsConversationsOnReady.push(configureHubspotConversations);
             } else {
                 window.hsConversationsOnReady = [configureHubspotConversations];
             }
