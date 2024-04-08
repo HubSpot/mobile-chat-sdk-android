@@ -18,6 +18,10 @@ plugins {
     id("net.researchgate.release") version "3.0.2"
 }
 
+tasks.named("afterReleaseBuild") {
+    dependsOn("publish")
+}
+
 android {
     namespace = "com.hubspot.mobilesdk"
 
