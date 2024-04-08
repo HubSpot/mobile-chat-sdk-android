@@ -18,6 +18,12 @@ plugins {
     id("net.researchgate.release") version "3.0.2"
 }
 
+release {
+    git {
+        requireBranch.set("release")
+    }
+}
+
 tasks.named("afterReleaseBuild") {
     dependsOn("publish")
 }
