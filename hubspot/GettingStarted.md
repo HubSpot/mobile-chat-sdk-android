@@ -10,7 +10,7 @@ The SDK containing hubspot chat view , notification functionality, and additiona
 
 As a start, you need to add a hubspot package into your applications. You can add these below line of code in the build.gradle file.
 ```
-implementation "com.hubspot.mobilesdk:hubspot:LATEST_VERSION"  // Use the latest version of the sdk here
+implementation "com.hubspot.mobilechatsdk:mobile-chat-sdk-android::LATEST_VERSION"  // Use the latest version of the sdk here
 ```
 
 Be sure to download and include the `hubspot-info.json` file from your hubspot account and keep it
