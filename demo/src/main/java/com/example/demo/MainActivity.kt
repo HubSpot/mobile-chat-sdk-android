@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val listener by lazy {
         NavController.OnDestinationChangedListener { _, destination, arguments ->
-            val screensToHideLayout = listOf(R.id.navigation_webview, R.id.fragment_custom_chat_flow)
+            val screensToHideLayout = listOf(R.id.navigation_webview, R.id.fragment_custom_chat_flow, R.id.fragment_sdk_option, R.id.fragment_setting)
             when {
                 screensToHideLayout.contains(destination.id) -> {
                     binding.bottomNavView.visibility = View.GONE

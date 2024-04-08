@@ -1,8 +1,8 @@
 package com.example.demo.setting
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.demo.R
 import com.example.demo.base.BaseFragment
@@ -11,7 +11,6 @@ import com.example.demo.base.observe
 import com.example.demo.base.viewBinding
 import com.example.demo.databinding.FragmentSettingBinding
 import com.hubspot.mobilesdk.HubspotManager
-import com.hubspot.mobilesdk.HubspotWebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,6 +44,9 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
     }
 
     private fun setupUI() {
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
         binding.buttonConfigure.setOnClickListener {
             viewModel.processAction(
                 SettingAction.ValidateSetting(
@@ -72,7 +74,7 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
 
             is SettingEffect.Configure -> {
                 hubspotManager.setUserIdentity(effect.email, effect.token)
-                startActivity(Intent(requireContext(), HubspotWebActivity::class.java))
+                Toast.makeText(requireContext(), getString(R.string.email_token_configured), Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -162,9 +162,24 @@ class HubspotManager private constructor(private val context: Context) {
     fun getChatProperties() = chatProperties
 
     /**
-     * Internal getter method for hubspot portal id
+     * Getter method for hubspot portal id
      **/
-    internal fun getPortalId() = hubspotConfig?.portalId?.let { it } ?: throw HubspotConfigError.MissingPortalID
+    fun getPortalId() = hubspotConfig?.portalId?.let { it } ?: throw HubspotConfigError.MissingPortalID
+
+    /**
+     * Getter method for hubspot Hublet
+     **/
+    fun getHublet() = hubspotConfig?.hublet?.let { it } ?: throw HubspotConfigError.MissingHubletID
+
+    /**
+     * Getter method for hubspot Environment
+     **/
+    fun getEnvironment() = hubspotConfig?.environment?.let { it } ?: throw HubspotConfigError.MissingEnvironment
+
+    /**
+     * Getter method for hubspot DefaultChatFlow
+     **/
+    fun getDefaultChatFlow() = hubspotConfig?.defaultChatFlow?.let { it } ?: throw HubspotConfigError.MissingDefaultChatFlow
 
     /**
      * This method is used for sending the token via Hubspot API
