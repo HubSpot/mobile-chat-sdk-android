@@ -49,4 +49,16 @@
     <string name="delete_fcm_token">Click here to delete FCM token</string>
     <string name="action_logout">Logout</string>
     <string name="add_email_and_token_for_configuration">Add Email and Token for Configuration</string>
+    <string name="sdk_options">SDK Options</string>
+    <string name="current_config">Current Config</string>
+    <string name="portal_id">Portal ID</string>
+    <string name="hublet">Hublet</string>
+    <string name="environment">Environment</string>
+    <string name="default_chatflow">Default ChatFlow</string>
+    <string name="user_identity">User Identity</string>
+    <string name="not_set">Not Set</string>
+    <string name="token">Token</string>
+    <string name="email">Email</string>
+    <string name="clear_config_data">Clear Config Data</string>
+    <string name="email_token_configured"><![CDATA[Email & Token Configured]]></string>
 </resources>

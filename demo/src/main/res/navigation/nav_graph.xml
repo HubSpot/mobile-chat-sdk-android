@@ -29,6 +29,10 @@
         <action
             android:id="@+id/action_go_to_custom_chat_flow"
             app:destination="@id/fragment_custom_chat_flow" />
+
+        <action
+            android:id="@+id/action_go_to_sdk_options"
+            app:destination="@id/fragment_sdk_option" />
     </fragment>
     <fragment
         android:id="@+id/fragment_custom_button"
@@ -97,5 +101,13 @@
         android:id="@+id/fragment_custom_chat_flow"
         android:name="com.example.demo.customchatflow.CustomChatFlowFragment"
         android:label="CustomChatFlowFragment" />
+    <fragment
+        android:id="@+id/fragment_sdk_option"
+        android:name="com.example.demo.sdkoption.SDKOptionFragment"
+        tools:layout="@layout/fragment_sdk_option">
+        <action
+            android:id="@+id/action_go_to_setting"
+            app:destination="@id/fragment_setting" />
+    </fragment>
 
 </navigation>

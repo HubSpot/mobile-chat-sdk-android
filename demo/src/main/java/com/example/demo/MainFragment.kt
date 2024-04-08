@@ -94,6 +94,11 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                         true
                     }
 
+                    R.id.action_sdk_options -> {
+                        navigateTo(MainFragmentDirections.actionGoToSdkOptions())
+                        true
+                    }
+
                     else -> false
                 }
             }

@@ -63,16 +63,33 @@ internal sealed class HubspotConfigError : Throwable() {
             get() = "Couldn't find a environment from this file: $defaultConfigFileName"
     }
 
+    /**
+     * Shows error when default chatflow  is missing
+     */
+    data object MissingDefaultChatFlow : HubspotConfigError() {
+        override val message: String
+            get() = "Couldn't find a default chat flow from this file: $defaultConfigFileName"
+    }
+
+    /**
+     * Shows error when Add new device token API failed
+     */
     data object AddNewDeviceTokenAPIFailure : HubspotConfigError() {
         override val message: String
             get() = "Add new device token API fails from the hubspot"
     }
 
+    /**
+     * Shows error when Delete new device token API failed
+     */
     data object DeleteDeviceTokenAPIFailure : HubspotConfigError() {
         override val message: String
             get() = "Delete device token API fails from the hubspot"
     }
 
+    /**
+     * Shows error when Meta Data API Failed
+     */
     data object MetaDataAPIFailure : HubspotConfigError() {
         override val message: String
             get() = "MetaData API fails from the hubspot"

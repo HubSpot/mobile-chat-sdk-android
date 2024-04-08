@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  fragment_sdk_option.xml
+  Hubspot Mobile SDK
+   
+  Copyright (c) 2024 Hubspot, Inc. 
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textAlignment="textStart"
+        app:buttonGravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back_arrow"
+        app:navigationIconTint="@color/orange"
+        app:title="@string/back"
+        app:titleTextColor="@color/orange" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/spacing_medium" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/spacing_medium" />
+
+            <TextView
+                android:id="@+id/textViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/sdk_options"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewConfigLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/current_config"
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/textViewLabel" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewProperty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewConfigLabel">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewPortalID"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/portal_id"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewPortalIDValue"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="44603047" />
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:layout_constraintTop_toBottomOf="@id/textViewPortalID" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewHublet"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/hublet"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewPortalID" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewHubletValue"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewPortalIDValue"
+                        tools:text="na1" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewHublet" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewEnv"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/environment"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewHublet" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewEnvValue"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewHubletValue"
+                        tools:text="prod" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:layout_constraintTop_toBottomOf="@id/textViewEnv" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewChatFlow"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/default_chatflow"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewEnv" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewChatFlowValue"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewEnvValue"
+                        tools:text="support" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textViewUserIdentityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/user_identity"
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/cardViewProperty" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewUserIdentity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewUserIdentityLabel">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewNotSet"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/not_set"
+                        android:textSize="18sp"
+                        app:constraint_referenced_ids="groupNotSet"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/dividerNotSet"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:constraint_referenced_ids="groupNotSet"
+                        app:layout_constraintTop_toBottomOf="@id/textViewNotSet" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewEmailLabel"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/email"
+                        android:textSize="18sp"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dividerNotSet" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewEmailValue"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:textSize="18sp"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dividerNotSet"
+                        tools:text="varsha.bhatia@tapadoo.com" />
+
+                    <View
+                        android:id="@+id/dividerEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintTop_toBottomOf="@id/textViewEmailLabel" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewTokenLabel"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/token"
+                        android:textSize="18sp"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dividerEmail" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewTokenValue"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_medium"
+                        android:textSize="18sp"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintStart_toEndOf="@id/textViewTokenLabel"
+                        app:layout_constraintTop_toBottomOf="@id/dividerEmail"
+                        tools:text="diKXmxAeRviyvmqmGXcsbw:APA91bF1HpABzrQKjkDKVcPhDPRWImVb6IbNnrNRe_Q_hF8v5mdpWw2BwVBGuljHNrI2sYBRXiV-h7EvWCCfEyZumYuDdGf6r1pehy6Dc5mO_4liaiBCnCsOrxvC3mA9puCFpEZMvaZn" />
+
+                    <View
+                        android:id="@+id/dividerToken"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintTop_toBottomOf="@id/textViewTokenValue" />
+
+
+                    <TextView
+                        android:id="@+id/textViewConfigure"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/configure"
+                        android:textColor="@color/orange"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dividerToken" />
+
+                    <View
+                        android:id="@+id/dividerConfig"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/divider"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintTop_toBottomOf="@id/textViewConfigure" />
+
+                    <TextView
+                        android:id="@+id/textViewClearConfig"
+                        style="@style/MaterialAlertDialog.Material3.Body.Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="@string/clear_config_data"
+                        android:textColor="@color/orange"
+                        android:textSize="18sp"
+                        app:constraint_referenced_ids="groupEmailToken"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dividerConfig" />
+
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/groupNotSet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="textViewNotSet, dividerNotSet" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/groupEmailToken"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:constraint_referenced_ids="textViewEmailLabel, textViewEmailValue, dividerEmail, textViewTokenLabel, textViewTokenValue, dividerToken, dividerConfig, textViewClearConfig" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
