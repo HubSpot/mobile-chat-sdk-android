@@ -75,6 +75,10 @@ $dokka.location:com.hubspot.mobilesdk/HubspotManager/deleteDeviceToken/#kotlin.S
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/disableLogs/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/disable-logs.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/enableLogs/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/enable-logs.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/getChatProperties/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-chat-properties.html
+$dokka.location:com.hubspot.mobilesdk/HubspotManager/getDefaultChatFlow/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-default-chat-flow.html
+$dokka.location:com.hubspot.mobilesdk/HubspotManager/getEnvironment/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-environment.html
+$dokka.location:com.hubspot.mobilesdk/HubspotManager/getHublet/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-hublet.html
+$dokka.location:com.hubspot.mobilesdk/HubspotManager/getPortalId/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-portal-id.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/getPushToken/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/get-push-token.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/logout/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/logout.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager/setChatProperties/#kotlin.collections.Map[kotlin.String,kotlin.String]/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/set-chat-properties.html
