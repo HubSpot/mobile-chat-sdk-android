@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  network_security_config.xml
+  Hubspot Mobile SDK
+  Copyright (c) 2024 Hubspot, Inc.
+  -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
