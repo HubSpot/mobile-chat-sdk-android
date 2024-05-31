@@ -6,9 +6,13 @@
  ************************************************/
 package com.hubspot.mobilesdk.widget
 
+import android.content.Intent
+import android.net.Uri
 import android.webkit.JavascriptInterface
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.content.ContextCompat
 import timber.log.Timber
 
 /**
@@ -18,6 +22,13 @@ internal class HubspotWebViewClient : WebViewClient() {
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         injectJavaScript(view)
+    }
+
+    // This method handles the navigation flow for links which opens default phone browser.
+    override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+        val i = Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
+        view?.context?.let { ContextCompat.startActivity(it, i, null) }
+        return true
     }
 
     /**
