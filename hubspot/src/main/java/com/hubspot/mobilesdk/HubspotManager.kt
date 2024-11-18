@@ -9,14 +9,17 @@ package com.hubspot.mobilesdk
 import android.content.Context
 import android.net.Uri
 import com.hubspot.mobilesdk.HubspotWebActivity.Companion.CHAT_FLOW_KEY
+import com.hubspot.mobilesdk.config.Environment
 import com.hubspot.mobilesdk.config.Hublet
 import com.hubspot.mobilesdk.config.HubspotConfig
 import com.hubspot.mobilesdk.config.HubspotConfig.Companion.defaultConfigFileName
 import com.hubspot.mobilesdk.config.HubspotConfigError
+import com.hubspot.mobilesdk.config.HubspotEnvironment
 import com.hubspot.mobilesdk.util.PreferenceHelper
 import com.hubspot.mobilesdk.errorhandling.NetworkError
 import com.hubspot.mobilesdk.firebase.PushNotificationChatData
 import com.hubspot.mobilesdk.model.DeviceTokenParams
+import com.hubspot.mobilesdk.network.NetworkDependencies
 import com.hubspot.mobilesdk.usecases.AddNewDeviceTokenUseCase
 import com.hubspot.mobilesdk.usecases.DeleteDeviceTokenUseCase
 import kotlinx.coroutines.Dispatchers
@@ -83,7 +86,9 @@ class HubspotManager private constructor(private val context: Context) {
             .bufferedReader()
             .use { it.readText() }
         val json = Json.decodeFromString<HubspotConfig>(jsonString)
-        hubspotConfig = HubspotConfig(json.environment, json.hublet, json.portalId, json.defaultChatFlow)
+        val config = HubspotConfig(json.environment, json.hublet, json.portalId, json.defaultChatFlow)
+        hubspotConfig = config
+        NetworkDependencies.configure(config)
     }
 
     /**
@@ -108,16 +113,16 @@ class HubspotManager private constructor(private val context: Context) {
     fun chatURL(chatFlow: String? = null, pushData: PushNotificationChatData? = null): String {
         val hublet = hubspotConfig?.hublet?.let { Hublet(it) } ?: throw HubspotConfigError.MissingHubletID
         val portalId = hubspotConfig?.portalId?.let { it } ?: throw HubspotConfigError.MissingPortalID
-        val environment = hubspotConfig?.environment?.let { it } ?: throw HubspotConfigError.MissingEnvironment
+        val environment = hubspotConfig?.environment?.let { Environment(it) } ?: throw HubspotConfigError.MissingEnvironment
         val defaultChatFlow = hubspotConfig?.defaultChatFlow
 
         val components = Uri.Builder()
             .scheme("https")
-            .authority("${hublet.appsSubDomain}.hubspot.com")
+            .authority("${hublet.appsSubDomain}.hubspot${environment.chatURLSuffix}.com")
             .path("/conversations-visitor-embed")
             .appendQueryParameter("portalId", pushData?.portalId ?: portalId)
             .appendQueryParameter("hublet", hublet.id)
-            .appendQueryParameter("env", environment)
+            .appendQueryParameter("env", environment.environment.value)
             .appendQueryParameter("email", hubspotPref.email)
             .appendQueryParameter("identificationToken", hubspotPref.token)
             .build()
