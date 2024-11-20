@@ -14,10 +14,30 @@ import java.util.Locale
 /**
  * HubspotEnvironment class has either QA or PRODUCTION variables
  */
-sealed class HubspotEnvironment(open var env: String) {
-    object QA : HubspotEnvironment("qa")
+internal enum class HubspotEnvironment(val value: String) {
+    QA("qa"),
+    PRODUCTION("prod")
+}
 
-    object PRODUCTION : HubspotEnvironment("prod")
+internal data class Environment(private val env: String) {
+    val environment: HubspotEnvironment
+        get() {
+            return if (this.env == HubspotEnvironment.QA.value) {
+                HubspotEnvironment.QA
+            } else {
+                HubspotEnvironment.PRODUCTION
+            }
+        }
+
+    val chatURLSuffix: String
+        get() {
+            return if (this.environment == HubspotEnvironment.QA) {
+                HubspotEnvironment.QA.value
+            } else {
+                ""
+            }
+
+        }
 }
 
 /**
@@ -31,6 +51,15 @@ internal data class Hublet(val id: String) {
                 "app"
             } else {
                 "app-$id"
+            }
+        }
+
+    val apiSubDomain: String
+        get() {
+            return if (id.lowercase() == defaultUS) {
+                "api"
+            } else {
+                "api-$id"
             }
         }
 }
