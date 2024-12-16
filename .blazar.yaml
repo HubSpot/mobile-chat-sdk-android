@@ -3,7 +3,7 @@ buildDeps:
   - maven3
   - node-20.11.0
 
-buildType: CENTOS8
+buildType: AMD64
 
 env:
   ANDROID_HOME: /usr/share/hubspot/android-sdk-linux
