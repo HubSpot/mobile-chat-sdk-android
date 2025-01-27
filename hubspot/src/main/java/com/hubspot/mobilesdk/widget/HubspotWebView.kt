@@ -33,7 +33,20 @@ class HubspotWebView @JvmOverloads constructor(
 ) : WebView(context, attrs, defStyleAttr) {
     private var manager: HubspotManager = HubspotManager.getInstance(context)
     private var hsThreadId: String? = null
-    private val onThreadIdFetched: () -> Unit = {
+    private var chatScreenCloseListener: (() -> Unit)? = null
+    private val onThreadIdFetched: (HubspotWebViewClient.JsEvents) -> Unit = { event ->
+        when (event) {
+            is HubspotWebViewClient.JsEvents.WebViewHostCloseEvent -> handleChatScreenCloseEvent()
+            is HubspotWebViewClient.JsEvents.PostConversationIdEvent -> handleConversationIdEvent()
+        }
+    }
+
+    private fun handleChatScreenCloseEvent() {
+        chatScreenCloseListener?.invoke()
+            ?: Timber.e("HubspotWebView:Close chat screen listener undefined")
+    }
+
+    private fun handleConversationIdEvent() {
         findViewTreeLifecycleOwner()?.lifecycle?.coroutineScope?.launch(Dispatchers.IO) {
             when {
                 !hsThreadId.isNullOrBlank() -> {
@@ -81,6 +94,13 @@ class HubspotWebView @JvmOverloads constructor(
         val headers = HashMap<String, String>()
         headers["Accept-Language"] = Locale.getDefault().toString()
         loadUrl(chatURL, headers)
+    }
+
+    /**
+     * Add callback to listen to the chat screen close events from the WebView
+     */
+    fun addChatScreenCloseListener(listener: () -> Unit) {
+        this.chatScreenCloseListener = listener
     }
 
     /**

@@ -34,7 +34,7 @@ internal class HubspotWebViewClient : WebViewClient() {
     /**
      * Internal function to pass lambda to HubspotWebViewClient. This lambda will be invoked when JS evaluation on webview is complete
      */
-    internal fun setActionAfterJsEvaluation(actionOnThreadIdFetched: () -> Unit) {
+    internal fun setActionAfterJsEvaluation(actionOnThreadIdFetched: (JsEvents) -> Unit) {
         JSBridge.assignCallback(actionOnThreadIdFetched)
     }
 
@@ -58,7 +58,10 @@ internal class HubspotWebViewClient : WebViewClient() {
                         nativeApp.postMessage("conversation_id", conversationId);
                         nativeApp.postConversationId(conversationId);
                     });
-                    
+                    window.HubSpotConversations.on('sdkCloseButtonClick', payload => {
+                        nativeApp.postMessage("info", JSON.stringify(payload));
+                        nativeApp.closeWebViewHost()
+                    });
                     nativeApp.postMessage("info", "Finished setting up handlers");
                 } else {
                     nativeApp.postMessage("info","No object to set handlers on still");
@@ -84,7 +87,7 @@ internal class HubspotWebViewClient : WebViewClient() {
     object JSBridge {
 
         private var conversationId: String? = null
-        private lateinit var callback: () -> Unit
+        private lateinit var callback: (JsEvents) -> Unit
 
         /**
          * postMessage is used to show the logs with info and message when interacting with javascript
@@ -100,7 +103,15 @@ internal class HubspotWebViewClient : WebViewClient() {
         @JavascriptInterface
         fun postConversationId(conversationId: String) {
             this.conversationId = conversationId
-            callback.invoke()
+            callback.invoke(JsEvents.PostConversationIdEvent(conversationId))
+        }
+
+        /**
+         * Invokes a callback when the close button in the chat screen is clicked
+         */
+        @JavascriptInterface
+        fun closeWebViewHost() {
+            callback.invoke(JsEvents.WebViewHostCloseEvent)
         }
 
         /**
@@ -121,9 +132,14 @@ internal class HubspotWebViewClient : WebViewClient() {
          * Internal function to assign callback to the JSBridge object, responsible for interfacing with kotlin code and injected JS code.
          * @param callback lambda that will be invoked after manual JS evaluation  on current webpage
          */
-        internal fun assignCallback(callback: () -> Unit) {
+        internal fun assignCallback(callback: (JsEvents) -> Unit) {
             this.callback = callback
         }
+    }
+
+    sealed class JsEvents {
+        data class PostConversationIdEvent(val conversationId: String): JsEvents()
+        data object WebViewHostCloseEvent: JsEvents()
     }
 
 }

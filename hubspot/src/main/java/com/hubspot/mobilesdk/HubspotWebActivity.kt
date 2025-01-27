@@ -45,6 +45,7 @@ class HubspotWebActivity : AppCompatActivity() {
         with(binding.hubspotwebview) {
             settings.javaScriptEnabled = true
             show(chatFlowId, pushData)
+            addChatScreenCloseListener { finish() }
             webChromeClient = object : WebChromeClient() {
                 override fun onShowFileChooser(webView: WebView?, filePathCallback: ValueCallback<Array<Uri>>?, fileChooserParams: FileChooserParams?): Boolean {
                     // When we press back button without selecting any component(image/video/audio etc.),
