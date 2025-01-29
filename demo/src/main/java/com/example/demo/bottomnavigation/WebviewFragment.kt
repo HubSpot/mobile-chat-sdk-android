@@ -32,6 +32,11 @@ class WebviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.webview.show()
+        with(binding.webview) {
+            addChatScreenCloseListener {
+                requireActivity().run { runOnUiThread { onBackPressedDispatcher.onBackPressed() } }
+            }
+            show()
+        }
     }
 }
