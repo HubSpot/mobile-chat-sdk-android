@@ -1,10 +1,5 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:com.hubspot.mobilesdk.config////PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment.PRODUCTION///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/-p-r-o-d-u-c-t-i-o-n/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment.QA///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/-q-a/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/index.html
-$dokka.location:com.hubspot.mobilesdk.config/HubspotEnvironment/env/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.config/-hubspot-environment/env.html
 $dokka.location:com.hubspot.mobilesdk.firebase////PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.firebase/index.html
 $dokka.location:com.hubspot.mobilesdk.firebase/HubspotFirebaseMessagingService///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.firebase/-hubspot-firebase-messaging-service/index.html
 $dokka.location:com.hubspot.mobilesdk.firebase/HubspotFirebaseMessagingService/HubspotFirebaseMessagingService/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.firebase/-hubspot-firebase-messaging-service/-hubspot-firebase-messaging-service.html
@@ -66,6 +61,7 @@ $dokka.location:com.hubspot.mobilesdk.widget/HubspotFloatingActionButton///Point
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotFloatingActionButton/HubspotFloatingActionButton/#android.content.Context#android.util.AttributeSet?#kotlin.Int/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-floating-action-button/-hubspot-floating-action-button.html
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/index.html
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView/HubspotWebView/#android.content.Context#android.util.AttributeSet?#kotlin.Int/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/-hubspot-web-view.html
+$dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView/addChatScreenCloseListener/#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/add-chat-screen-close-listener.html
 $dokka.location:com.hubspot.mobilesdk.widget/HubspotWebView/show/#kotlin.String?#com.hubspot.mobilesdk.firebase.PushNotificationChatData?/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk.widget/-hubspot-web-view/show.html
 $dokka.location:com.hubspot.mobilesdk////PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/index.html
 $dokka.location:com.hubspot.mobilesdk/HubspotManager///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-manager/index.html
@@ -90,7 +86,6 @@ $dokka.location:com.hubspot.mobilesdk/HubspotManager/userIdentityToken/#/Pointin
 $dokka.location:com.hubspot.mobilesdk/HubspotWebActivity///PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-web-activity/index.html
 $dokka.location:com.hubspot.mobilesdk/HubspotWebActivity/HubspotWebActivity/#/PointingToDeclaration/-hubspot-mobile -s-d-k/com.hubspot.mobilesdk/-hubspot-web-activity/-hubspot-web-activity.html
 com.hubspot.mobilesdk
-com.hubspot.mobilesdk.config
 com.hubspot.mobilesdk.firebase
 com.hubspot.mobilesdk.metadata
 com.hubspot.mobilesdk.model
