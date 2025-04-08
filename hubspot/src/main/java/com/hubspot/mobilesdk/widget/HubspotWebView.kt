@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.webkit.WebView
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
+import com.hubspot.mobilesdk.BuildConfig
 import com.hubspot.mobilesdk.HubspotManager
 import com.hubspot.mobilesdk.config.HubspotConfigError
 import com.hubspot.mobilesdk.errorhandling.NetworkError
@@ -85,7 +86,7 @@ class HubspotWebView @JvmOverloads constructor(
         manager.configure()
         val chatURL = manager.chatURL(chatFlow, pushData)
         isFocusableInTouchMode = true
-        val userAgent = "${settings.userAgentString}$HUBSPOT_MOBILE_CONFIG"
+        val userAgent = "${settings.userAgentString}$HUBSPOT_MOBILE_CONFIG/${decrementPatch(BuildConfig.version)}"
         settings.userAgentString = userAgent
         settings.javaScriptEnabled = true
         webViewClient = HubspotWebViewClient()
@@ -96,7 +97,21 @@ class HubspotWebView @JvmOverloads constructor(
         loadUrl(chatURL, headers)
     }
 
-    /**
+    private fun decrementPatch(version: String): String {
+        val parts = version.split("-")
+        val versionNumbers = parts[0].split(".").map { it.toInt() }.toMutableList()
+        if (versionNumbers.size == 3) {
+            versionNumbers[2] = (versionNumbers[2] - 1).coerceAtLeast(0)
+        }
+        val newVersion = versionNumbers.joinToString(".")
+        return if (parts.size > 1) {
+            "$newVersion-${parts[1]}"
+        } else {
+            newVersion
+        }
+    }
+
+        /**
      * Add callback to listen to the chat screen close events from the WebView
      */
     fun addChatScreenCloseListener(listener: () -> Unit) {

@@ -35,6 +35,7 @@ android {
     buildTypes {
         release {
             buildConfigField("Boolean", "DEBUG", "false")
+            buildConfigField("String", "version", "\"${version}\"")
             postprocessing {
                 consumerProguardFile("consumer-rules.pro")
                 isMinifyEnabled = false
@@ -43,6 +44,7 @@ android {
 
         debug {
             buildConfigField("Boolean", "DEBUG", "true")
+            buildConfigField("String", "version", "\"${version}\"")
         }
     }
 
