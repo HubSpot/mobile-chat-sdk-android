@@ -63,7 +63,7 @@ internal class DeviceInformation {
         fun getAppVersion(context: Context): String {
             return try {
                 val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-                pInfo.versionName
+                pInfo.versionName ?: "N/A"
             } catch (e: PackageManager.NameNotFoundException) {
                 Timber.e(e)
                 "N/A"
