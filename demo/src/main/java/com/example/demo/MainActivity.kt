@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.demo.databinding.ActivityMainBinding
+import com.example.demo.extention.applyEdgeToEdgeInsets
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hubspot.mobilesdk.HubspotManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-
+        applyEdgeToEdgeInsets()
         val navView: BottomNavigationView = binding.bottomNavView
         val navController = findNavController(R.id.navHostFragment)
         appBarConfiguration = AppBarConfiguration(

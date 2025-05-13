@@ -28,6 +28,9 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name="com.hubspot.mobilesdk.HubspotWebActivity"
+            android:theme="@style/Theme.HubspotChat"/>
+
         <service
             android:name=".firebase.DemoFirebaseMessagingService"
             android:exported="false">

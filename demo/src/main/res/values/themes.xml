@@ -6,4 +6,9 @@
 
     <style name="Theme.DemoApp" parent="Base.Theme.DemoApp" />
 
+    <!--Theme to set the system bar colors for HubspotWebActivity-->
+    <style name="Theme.HubspotChat" parent="Base.Theme.DemoApp">
+        <item name="android:windowBackground">@color/orange</item>
+    </style>
+
 </resources>

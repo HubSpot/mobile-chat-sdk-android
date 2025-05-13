@@ -67,7 +67,7 @@ subprojects {
             compileSdkVersion(35)
             defaultConfig {
                 minSdk = 26
-                targetSdk = 34
+                targetSdk = 35
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
