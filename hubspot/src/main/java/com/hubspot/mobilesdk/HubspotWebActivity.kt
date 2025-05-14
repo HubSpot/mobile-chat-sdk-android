@@ -10,11 +10,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.hubspot.mobilesdk.databinding.ActivityWebviewBinding
 import com.hubspot.mobilesdk.firebase.HubspotFirebaseMessagingService
 import com.hubspot.mobilesdk.firebase.HubspotFirebaseMessagingService.Companion.HS_PUSH_DATA
@@ -34,6 +38,7 @@ class HubspotWebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWebviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        applyEdgeToEdgeInsets()
         val chatFlowId = intent.getStringExtra(CHAT_FLOW_KEY)
         val pushData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.extras?.getSerializable(HS_PUSH_DATA, PushNotificationChatData::class.java)
@@ -98,6 +103,28 @@ class HubspotWebActivity : AppCompatActivity() {
             fileUploadCallback = null
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun applyEdgeToEdgeInsets() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            val view = findViewById<View>(android.R.id.content)
+            ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
+                //Retrieve the Insets for system bars, display cutouts and ime
+                val bars = windowInsets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() or
+                            WindowInsetsCompat.Type.displayCutout() or
+                            WindowInsetsCompat.Type.ime()
+                )
+                //Update the padding for the screen content with the retrieved insets
+                v.updatePadding(
+                    left = bars.left,
+                    top = bars.top,
+                    right = bars.right,
+                    bottom = bars.bottom,
+                )
+                windowInsets
+            }
         }
     }
 

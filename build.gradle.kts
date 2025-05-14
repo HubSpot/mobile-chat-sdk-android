@@ -64,10 +64,10 @@ subprojects {
 
     afterEvaluate {
         extensions.findByType<com.android.build.gradle.BaseExtension>()?.run {
-            compileSdkVersion(34)
+            compileSdkVersion(35)
             defaultConfig {
                 minSdk = 26
-                targetSdk = 34
+                targetSdk = 35
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
