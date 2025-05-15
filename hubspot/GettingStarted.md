@@ -93,3 +93,43 @@ changing user in a multi user app.
 To clear this data, call `HubspotManager.logout()` at an appropriate time in in your app. 
 **Note:** This only impacts the data used for future chat sessions - it has no impact on data or chat sessions
 already stored in hubspot.
+
+### Edge-to-Edge Display Behavior
+
+**Versions 1.0.4 and Lower:**
+
+These versions do not inherently handle edge-to-edge display. To temporarily opt out of edge-to-edge behavior while using these versions
+add the following style item to your `application` or `activity` theme in your `styles.xml` or `themes.xml` file:
+
+```
+<item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+```
+
+**Future SDK Releases:**
+
+Newer releases of this SDK are designed to support Android's edge-to-edge display capabilities.
+When edge-to-edge is enabled in your application, your content will draw behind the system bars (Status Bar and Navigation Bar).
+
+To achieve a seamless edge-to-edge experience, you typically configure your application's theme and set the desired background for your window.
+
+To set the background color that will be visible behind the system bars when they are transparent or translucent, define a color for the `android:windowBackground`
+attribute in your application or activity theme within your `themes.xml` or `styles.xml` file. Then, apply this theme to your `application` or the relevant `activity` in your `AndroidManifest.xml`.
+
+Example:
+
+To set the window background color for a specific activity (e.g., HubspotWebActivity), define a theme like this in your `themes.xml` or `styles.xml`:
+```
+<!-- Theme defining the window background color for HubspotWebActivity -->
+<style name="Theme.HubspotChat" parent="Base.Theme.DemoApp">
+    <!-- Sets the background color of the activity's window -->
+    <item name="android:windowBackground">@color/orange</item>
+</style>
+```
+Then, apply this theme to the activity in your `AndroidManifest.xml`:
+
+```
+<activity
+    android:name="com.hubspot.mobilesdk.HubspotWebActivity"
+    android:theme="@style/Theme.HubspotChat"
+    ... />
+```
