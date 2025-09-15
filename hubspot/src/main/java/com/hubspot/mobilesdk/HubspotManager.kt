@@ -232,6 +232,8 @@ class HubspotManager private constructor(private val context: Context) {
      */
     companion object {
         private var INSTANCE: HubspotManager? = null
+
+        @JvmStatic
         fun getInstance(context: Context): HubspotManager {
             if (INSTANCE == null) {
                 INSTANCE = HubspotManager(context)
