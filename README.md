@@ -31,5 +31,6 @@ Be sure that the `package_name` in the file is `com.example.demo`.
 For more information, please refer to the following links:
 * https://central.sonatype.com/artifact/com.hubspot.mobilechatsdk/mobile-chat-sdk-android
 * https://developers.hubspot.com/docs/api-reference/mobile-chat-sdk/android
+* https://knowledge.hubspot.com/chatflows/integrate-a-hubspot-chatflow-with-a-mobile-app
 * https://knowledge.hubspot.com/chatflows/create-and-customize-a-mobile-chatflow
 
