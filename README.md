@@ -29,6 +29,7 @@ Be sure that the `package_name` in the file is `com.example.demo`.
 4. Build and Run the app
 
 For more information, please refer to the following links:
+* https://github.hubspot.com/mobile-chat-sdk-android/
 * https://central.sonatype.com/artifact/com.hubspot.mobilechatsdk/mobile-chat-sdk-android
 * https://developers.hubspot.com/docs/api-reference/mobile-chat-sdk/android
 * https://knowledge.hubspot.com/chatflows/integrate-a-hubspot-chatflow-with-a-mobile-app
