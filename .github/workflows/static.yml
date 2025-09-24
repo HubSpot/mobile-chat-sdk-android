@@ -37,7 +37,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ${{ github.repository }}/docs
+          repository: ${{ github.repository }}
+          path: docs
   deploy:
     needs: builddocs
     environment:
