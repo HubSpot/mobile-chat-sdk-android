@@ -7,6 +7,7 @@
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -45,7 +46,6 @@ subprojects {
         failOnWarning.set(false)
         suppressObviousFunctions.set(true)
         offlineMode.set(false)
-        outputDirectory.set(rootDir.resolve("docs"))
         dokkaSourceSets {
             moduleName.set("HubspotMobile SDK")
             configureEach {
@@ -64,7 +64,7 @@ subprojects {
 
     afterEvaluate {
         extensions.findByType<com.android.build.gradle.BaseExtension>()?.run {
-            compileSdkVersion(35)
+            compileSdkVersion(36)
             defaultConfig {
                 minSdk = 26
                 targetSdk = 35
@@ -90,6 +90,6 @@ allprojects {
 }
 
 tasks.withType<Wrapper> {
-    gradleVersion = "8.5"
+    gradleVersion = "8.13"
     distributionType = Wrapper.DistributionType.BIN
 }
