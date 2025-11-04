@@ -33,9 +33,12 @@ buildscript {
 }
 subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
-            freeCompilerArgs += listOf("-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi", "-Xstring-concat=inline")
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.addAll(
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xstring-concat=inline"
+            )
         }
     }
 
