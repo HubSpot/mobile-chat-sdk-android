@@ -86,7 +86,45 @@ class HubspotManager private constructor(private val context: Context) {
             .bufferedReader()
             .use { it.readText() }
         val json = Json.decodeFromString<HubspotConfig>(jsonString)
-        val config = HubspotConfig(json.environment, json.hublet, json.portalId, json.defaultChatFlow)
+
+        configure(
+            environment = json.environment,
+            hublet = json.hublet,
+            portalId = json.portalId,
+            defaultChatFlow = json.defaultChatFlow,
+        )
+    }
+
+    /**
+     * Creates HubSpot configuration programmatically.
+     *
+     * This method allows applications to configure the SDK dynamically without
+     * requiring a `hubspot-info.json` asset bundled in the APK.
+     *
+     * This is useful when configuration values are retrieved securely from a backend
+     * service after authentication or during runtime.
+     *
+     * @param environment HubSpot environment identifier (e.g. "prod", "qa", "test").
+     * @param hublet HubSpot data center identifier (e.g. "na1", "eu1").
+     * @param portalId HubSpot portal identifier.
+     * @param defaultChatFlow Default HubSpot chat flow identifier.
+     *
+     * @throws HubspotConfigError when any required configuration value is invalid.
+     */
+    @Throws(HubspotConfigError::class)
+    fun configure(
+        environment: String,
+        hublet: String,
+        portalId: String,
+        defaultChatFlow: String,
+    ) {
+        val config = HubspotConfig(
+            environment = environment,
+            hublet = hublet,
+            portalId = portalId,
+            defaultChatFlow = defaultChatFlow,
+        )
+
         hubspotConfig = config
         NetworkDependencies.configure(config)
     }
