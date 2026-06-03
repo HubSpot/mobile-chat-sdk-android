@@ -77,9 +77,9 @@ class HubspotManager private constructor(private val context: Context) {
      * It creates Hubspot configurations
      * When user uses the demo app, it always call this method to configure with the hubspot sdk.
      * This is the only method which is handled by the application.
-     * @throws HubspotConfigError when either environment is missing or hublet is missing or portalID is missing
+     * This method is synchronous and must be called before any other SDK method.
+     * Requires a valid `hubspot-info.json` file in the app's assets folder.
      **/
-    @Throws(HubspotConfigError::class)
     fun configure() {
         val jsonFileName = defaultConfigFileName
         val jsonString = context.assets.open(jsonFileName)
@@ -109,9 +109,8 @@ class HubspotManager private constructor(private val context: Context) {
      * @param portalId HubSpot portal identifier.
      * @param defaultChatFlow Default HubSpot chat flow identifier.
      *
-     * @throws HubspotConfigError when any required configuration value is invalid.
+     * This method is synchronous and must be called before any other SDK method.
      */
-    @Throws(HubspotConfigError::class)
     fun configure(
         environment: String,
         hublet: String,
@@ -145,12 +144,13 @@ class HubspotManager private constructor(private val context: Context) {
     /**
      * Create chat URL for hubspot webview
      *
+     * This method is synchronous and must be called after [configure].
      * @throws HubspotConfigError when either environment is missing or hublet is missing or portalID is missing
      **/
     @Throws(HubspotConfigError::class)
     fun chatURL(chatFlow: String? = null, pushData: PushNotificationChatData? = null): String {
         val hublet = hubspotConfig?.hublet?.let { Hublet(it) } ?: throw HubspotConfigError.MissingHubletID
-        val portalId = hubspotConfig?.portalId?.let { it } ?: throw HubspotConfigError.MissingPortalID
+        val portalId = hubspotConfig?.portalId ?: throw HubspotConfigError.MissingPortalID
         val environment = hubspotConfig?.environment?.let { Environment(it) } ?: throw HubspotConfigError.MissingEnvironment
         val defaultChatFlow = hubspotConfig?.defaultChatFlow
 
@@ -206,23 +206,31 @@ class HubspotManager private constructor(private val context: Context) {
 
     /**
      * Getter method for hubspot portal id
+     * @throws HubspotConfigError when portal id is missing
      **/
-    fun getPortalId() = hubspotConfig?.portalId?.let { it } ?: throw HubspotConfigError.MissingPortalID
+    @Throws(HubspotConfigError::class)
+    fun getPortalId() = hubspotConfig?.portalId ?: throw HubspotConfigError.MissingPortalID
 
     /**
      * Getter method for hubspot Hublet
+     * @throws HubspotConfigError when hublet id is missing
      **/
-    fun getHublet() = hubspotConfig?.hublet?.let { it } ?: throw HubspotConfigError.MissingHubletID
+    @Throws(HubspotConfigError::class)
+    fun getHublet() = hubspotConfig?.hublet ?: throw HubspotConfigError.MissingHubletID
 
     /**
      * Getter method for hubspot Environment
+     * @throws HubspotConfigError when environment is missing
      **/
-    fun getEnvironment() = hubspotConfig?.environment?.let { it } ?: throw HubspotConfigError.MissingEnvironment
+    @Throws(HubspotConfigError::class)
+    fun getEnvironment() = hubspotConfig?.environment ?: throw HubspotConfigError.MissingEnvironment
 
     /**
      * Getter method for hubspot DefaultChatFlow
+     * @throws HubspotConfigError when default chat flow is missing
      **/
-    fun getDefaultChatFlow() = hubspotConfig?.defaultChatFlow?.let { it } ?: throw HubspotConfigError.MissingDefaultChatFlow
+    @Throws(HubspotConfigError::class)
+    fun getDefaultChatFlow() = hubspotConfig?.defaultChatFlow ?: throw HubspotConfigError.MissingDefaultChatFlow
 
     /**
      * This method is used for sending the token via Hubspot API
