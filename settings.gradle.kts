@@ -1,7 +1,7 @@
 pluginManagement {
     repositories {
         if (System.getenv("BLAZAR_COORDINATES") != null) {
-            maven("https://nexus.hubspot.com/nexus-maven/repository/hubspot-development/")
+            maven("https://nexus.hubteam.com/nexus-maven/repository/hubspot-development/")
         }
         google()
         mavenCentral()
