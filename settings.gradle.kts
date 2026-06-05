@@ -3,7 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven("https://nexus.hubspot.com/repository/hubspot-development/")
+        maven("https://nexus.hubspot.com/nexus-maven/repository/hubspot-development/")
     }
 }
 dependencyResolutionManagement {
