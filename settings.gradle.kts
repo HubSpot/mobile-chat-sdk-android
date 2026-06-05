@@ -1,32 +1,20 @@
 import java.io.File
-import javax.xml.parsers.DocumentBuilderFactory
 
 pluginManagement {
     fun getMavenCredentials(): Pair<String, String>? {
-        val userHome = System.getProperty("user.home")
-        val mavenSettingsFile = File(userHome, ".m2/settings.xml")
-        if (!mavenSettingsFile.exists()) {
-            return null
-        }
-        val documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-        val document = documentBuilder.parse(mavenSettingsFile)
-        val servers = document.getElementsByTagName("server")
-        for (i in 0 until servers.length) {
-            val serverNode = servers.item(i)
-            val children = serverNode.childNodes
-            var id: String? = null
-            var username: String? = null
-            var password: String? = null
-            for (j in 0 until children.length) {
-                val node = children.item(j)
-                when (node.nodeName) {
-                    "id" -> id = node.textContent
-                    "username" -> username = node.textContent
-                    "password" -> password = node.textContent
+        val mavenSettingsFile = File(System.getProperty("user.home"), ".m2/settings.xml")
+        if (!mavenSettingsFile.exists()) return null
+        val content = mavenSettingsFile.readText()
+        val serverBlocks = Regex("""<server>(.*?)</server>""", RegexOption.DOT_MATCHES_ALL).findAll(content)
+        for (server in serverBlocks) {
+            val block = server.groupValues[1]
+            val idMatch = Regex("""<id>\s*([^<]+)\s*</id>""").find(block)
+            if (idMatch != null && idMatch.groupValues[1].trim() == "HubSpot-Nexus") {
+                val usernameMatch = Regex("""<username>\s*([^<]+)\s*</username>""").find(block)
+                val passwordMatch = Regex("""<password>\s*([^<]+)\s*</password>""").find(block)
+                if (usernameMatch != null && passwordMatch != null) {
+                    return Pair(usernameMatch.groupValues[1].trim(), passwordMatch.groupValues[1].trim())
                 }
-            }
-            if (id == "HubSpot-Nexus" && username != null && password != null) {
-                return Pair(username, password)
             }
         }
         return null
@@ -54,34 +42,23 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
     fun getMavenCredentials(): Pair<String, String>? {
-        val userHome = System.getProperty("user.home")
-        val mavenSettingsFile = File(userHome, ".m2/settings.xml")
-        if (!mavenSettingsFile.exists()) {
-            return null
-        }
-        val documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-        val document = documentBuilder.parse(mavenSettingsFile)
-        val servers = document.getElementsByTagName("server")
-        for (i in 0 until servers.length) {
-            val serverNode = servers.item(i)
-            val children = serverNode.childNodes
-            var id: String? = null
-            var username: String? = null
-            var password: String? = null
-            for (j in 0 until children.length) {
-                val node = children.item(j)
-                when (node.nodeName) {
-                    "id" -> id = node.textContent
-                    "username" -> username = node.textContent
-                    "password" -> password = node.textContent
+        val mavenSettingsFile = File(System.getProperty("user.home"), ".m2/settings.xml")
+        if (!mavenSettingsFile.exists()) return null
+        val content = mavenSettingsFile.readText()
+        val serverBlocks = Regex("""<server>(.*?)</server>""", RegexOption.DOT_MATCHES_ALL).findAll(content)
+        for (server in serverBlocks) {
+            val block = server.groupValues[1]
+            val idMatch = Regex("""<id>\s*([^<]+)\s*</id>""").find(block)
+            if (idMatch != null && idMatch.groupValues[1].trim() == "HubSpot-Nexus") {
+                val usernameMatch = Regex("""<username>\s*([^<]+)\s*</username>""").find(block)
+                val passwordMatch = Regex("""<password>\s*([^<]+)\s*</password>""").find(block)
+                if (usernameMatch != null && passwordMatch != null) {
+                    return Pair(usernameMatch.groupValues[1].trim(), passwordMatch.groupValues[1].trim())
                 }
-            }
-            if (id == "HubSpot-Nexus" && username != null && password != null) {
-                return Pair(username, password)
             }
         }
         return null
-    }
+    }    
 
     repositories {
         if (System.getenv("BLAZAR_COORDINATES") != null) {
@@ -99,6 +76,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "mobile-chat-sdk-android"
 include(":demo")
 include(":hubspot")
