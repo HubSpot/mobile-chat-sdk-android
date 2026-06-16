@@ -15,7 +15,7 @@ containers:
   - name: main
     securityContext: unprivileged
     user: hs-build
-    image: docker.hubteam.com/buildpacks/android-docker:2524
+    image: docker.hubteam.com/buildpacks/android-docker:1733
 
 steps:
   - description: Build with gradle
