@@ -74,13 +74,24 @@ class HubspotManager private constructor(private val context: Context) {
     }
 
     /**
-     * It creates Hubspot configurations
+     * Creates Hubspot configuration from JSON asset file.
+     *
      * When user uses the demo app, it always call this method to configure with the hubspot sdk.
      * This is the only method which is handled by the application.
+     *
      * This method is synchronous and must be called before any other SDK method.
      * Requires a valid `hubspot-info.json` file in the app's assets folder.
+     *
+     * Does nothing if configure has already been called for this instance.
+     *
+     * @throws HubspotConfigError when either environment is missing or hublet is missing or portalID is missing
      **/
     fun configure() {
+        if (hubspotConfig != null) {
+            // Configuration already exists, no need to configure again
+            return
+        }
+
         val jsonFileName = defaultConfigFileName
         val jsonString = context.assets.open(jsonFileName)
             .bufferedReader()
