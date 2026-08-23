@@ -21,7 +21,6 @@ import com.hubspot.mobilesdk.R
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.Serializable
-import javax.inject.Singleton
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -29,7 +28,6 @@ import kotlin.random.nextInt
 /**
  * This class represents the Hubspot Push Notifications from the Firebase Cloud Messaging Service
  */
-@Singleton
 open class HubspotFirebaseMessagingService : FirebaseMessagingService() {
     /**
      * This method is used when FCM send the token for the first time
