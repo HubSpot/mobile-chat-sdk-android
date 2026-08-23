@@ -14,14 +14,13 @@ import com.hubspot.mobilesdk.config.Hublet
 import com.hubspot.mobilesdk.config.HubspotConfig
 import com.hubspot.mobilesdk.config.HubspotConfig.Companion.defaultConfigFileName
 import com.hubspot.mobilesdk.config.HubspotConfigError
-import com.hubspot.mobilesdk.config.HubspotEnvironment
-import com.hubspot.mobilesdk.util.PreferenceHelper
 import com.hubspot.mobilesdk.errorhandling.NetworkError
 import com.hubspot.mobilesdk.firebase.PushNotificationChatData
 import com.hubspot.mobilesdk.model.DeviceTokenParams
 import com.hubspot.mobilesdk.network.NetworkDependencies
 import com.hubspot.mobilesdk.usecases.AddNewDeviceTokenUseCase
 import com.hubspot.mobilesdk.usecases.DeleteDeviceTokenUseCase
+import com.hubspot.mobilesdk.util.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -49,6 +48,8 @@ class HubspotManager private constructor(private val context: Context) {
     private val fcmToken: String
         get() = hubspotPref.fcmToken.toString()
 
+    private var loggingTree: Timber.Tree? = null
+
     /**
      * Shares the logs with chat started
      **/
@@ -57,20 +58,26 @@ class HubspotManager private constructor(private val context: Context) {
     }
 
     /**
-     * Enable the logs
+     * Enable the logs.
      **/
     fun enableLogs() {
-        Timber.plant(object : Timber.DebugTree() {
+        if (loggingTree != null) return
+        val tree = object : Timber.DebugTree() {
             override fun createStackElementTag(element: StackTraceElement) =
                 "(${element.fileName}:${element.lineNumber})"
-        })
+        }
+        loggingTree = tree
+        Timber.plant(tree)
     }
 
     /**
-     * Disable the logs
+     * Disable the logs.
      **/
     fun disableLogs() {
-        Timber.uprootAll()
+        loggingTree?.let {
+            Timber.uproot(it)
+            loggingTree = null
+        }
     }
 
     /**
