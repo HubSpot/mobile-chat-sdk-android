@@ -12,7 +12,7 @@ import android.content.SharedPreferences
 /**
  * The PreferenceHelper class used to store the email and token for the hubspot configuration
  */
-class PreferenceHelper(context: Context) {
+internal class PreferenceHelper(context: Context) {
     private val preferences: SharedPreferences = context.getSharedPreferences(hubspotPreferences, Context.MODE_PRIVATE)
 
     var email: String?

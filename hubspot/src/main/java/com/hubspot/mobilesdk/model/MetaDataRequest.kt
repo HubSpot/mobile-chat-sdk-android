@@ -13,7 +13,7 @@ import com.squareup.moshi.JsonClass
  * Request data class for MetaData api call
  */
 @JsonClass(generateAdapter = true)
-data class MetaDataRequest(
+internal data class MetaDataRequest(
     @Json(name = "email")
     val email: String,
     @Json(name = "visitorToken")

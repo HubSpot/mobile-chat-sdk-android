@@ -158,7 +158,7 @@ internal class HubspotWebViewClient : WebViewClient() {
         }
     }
 
-    sealed class JsEvents {
+    internal sealed class JsEvents {
         data class PostConversationIdEvent(val conversationId: String): JsEvents()
         data object WebViewHostCloseEvent: JsEvents()
     }
