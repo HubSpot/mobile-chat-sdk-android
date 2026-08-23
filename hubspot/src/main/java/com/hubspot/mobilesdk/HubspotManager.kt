@@ -50,8 +50,11 @@ class HubspotManager private constructor(private val context: Context) {
     private var loggingTree: Timber.Tree? = null
 
     /**
-     * Shares the logs with chat started
+     * Writes a log line marking the start of a chat.
      **/
+    @Deprecated(
+        message = "startChat() only logs. Launch HubspotWebActivity or use one of the chat widgets instead.",
+    )
     fun startChat() {
         Timber.w("CHAT STARTED..!!")
     }

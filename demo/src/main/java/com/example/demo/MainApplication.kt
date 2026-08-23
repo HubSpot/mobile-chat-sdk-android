@@ -16,7 +16,6 @@ class MainApplication : Application() {
 
         hubspotManager.enableLogs()
         hubspotManager.configure()
-        hubspotManager.startChat()
         hubspotManager.setChatProperties(
             mapOf(
                 ChatPropertyKey.CameraPermissions.chatPropertyValue to "false",
