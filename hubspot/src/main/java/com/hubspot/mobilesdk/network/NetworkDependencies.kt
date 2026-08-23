@@ -11,7 +11,6 @@ import com.hubspot.mobilesdk.BuildConfig
 import com.hubspot.mobilesdk.config.Environment
 import com.hubspot.mobilesdk.config.Hublet
 import com.hubspot.mobilesdk.config.HubspotConfig
-import com.hubspot.mobilesdk.config.HubspotConfigError
 import com.hubspot.mobilesdk.metadata.HubspotApi
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -33,7 +32,7 @@ internal object NetworkDependencies {
                 hubspotApi = Retrofit.Builder()
                     .baseUrl(baseUrl)
                     .client(createOkHttpClient())
-                    .addConverterFactory(createMoshiConverterFactory(createMoshi()))
+                    .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
                     .build()
                     .create(HubspotApi::class.java)
             }
@@ -47,14 +46,6 @@ internal object NetworkDependencies {
         val configuredUrl = "https://${hublet.apiSubDomain}.hubapi${environment.chatURLSuffix}.com/livechat-public/v1/mobile-sdk/"
 
         baseUrl = configuredUrl
-    }
-
-    private fun createMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
-        return MoshiConverterFactory.create(moshi)
-    }
-
-    private fun createMoshi(): Moshi {
-        return Moshi.Builder().build()
     }
 
     private fun createOkHttpClient(): OkHttpClient {

@@ -14,13 +14,13 @@ import com.hubspot.mobilesdk.config.Hublet
 import com.hubspot.mobilesdk.config.HubspotConfig
 import com.hubspot.mobilesdk.config.HubspotConfig.Companion.defaultConfigFileName
 import com.hubspot.mobilesdk.config.HubspotConfigError
+import com.hubspot.mobilesdk.util.PreferenceHelper
 import com.hubspot.mobilesdk.errorhandling.NetworkError
 import com.hubspot.mobilesdk.firebase.PushNotificationChatData
 import com.hubspot.mobilesdk.model.DeviceTokenParams
 import com.hubspot.mobilesdk.network.NetworkDependencies
 import com.hubspot.mobilesdk.usecases.AddNewDeviceTokenUseCase
 import com.hubspot.mobilesdk.usecases.DeleteDeviceTokenUseCase
-import com.hubspot.mobilesdk.util.PreferenceHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -31,7 +31,7 @@ import timber.log.Timber
 
 /** HubspotManager class enable and disable logs @see [enableLogs] & @see[disableLogs]
  * It manages the configuration changes from the assets file @see [configure]
- * It also builds chatURL @see [chatUrl]
+ * It also builds chatURL @see [chatURL]
  * It stores the email and token in memory @see [setUserIdentity]
  * It sets chat properties for chat session @see [getChatProperties] & @see [setChatProperties]
  * It sends the PushToken to Hubspot API @see [setPushToken]
@@ -39,7 +39,6 @@ import timber.log.Timber
 class HubspotManager private constructor(private val context: Context) {
     private var hubspotConfig: HubspotConfig? = null
     private var chatProperties: HashMap<String, String> = HashMap()
-    private var chatUrl: String = ""
     private val hubspotPref = PreferenceHelper(context)
     val userIdentityEmail: String
         get() = hubspotPref.email.toString()
@@ -97,8 +96,7 @@ class HubspotManager private constructor(private val context: Context) {
             return
         }
 
-        val jsonFileName = defaultConfigFileName
-        val jsonString = context.assets.open(jsonFileName)
+        val jsonString = context.assets.open(defaultConfigFileName)
             .bufferedReader()
             .use { it.readText() }
         val json = Json.decodeFromString<HubspotConfig>(jsonString)
@@ -181,7 +179,7 @@ class HubspotManager private constructor(private val context: Context) {
             .appendQueryParameter("identificationToken", hubspotPref.token)
             .build()
 
-        chatUrl = if (!chatFlow.isNullOrEmpty()) {
+        val chatUrl = if (!chatFlow.isNullOrEmpty()) {
             components.buildUpon().appendQueryParameter(CHAT_FLOW_KEY, chatFlow).toString()
         } else if (pushData?.chatflow.isNullOrEmpty()) {
             components.buildUpon().appendQueryParameter(CHAT_FLOW_KEY, defaultChatFlow).toString()

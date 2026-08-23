@@ -28,9 +28,11 @@ class PreferenceHelper(context: Context) {
         set(value) = preferences.edit().putString(prefFCMToken, value).apply()
 
     fun removePreferences() {
-        preferences.edit().remove(prefEmail).apply()
-        preferences.edit().remove(prefToken).apply()
-        preferences.edit().remove(prefFCMToken).apply()
+        preferences.edit()
+            .remove(prefEmail)
+            .remove(prefToken)
+            .remove(prefFCMToken)
+            .apply()
     }
 
     fun removeFcmToken() {
