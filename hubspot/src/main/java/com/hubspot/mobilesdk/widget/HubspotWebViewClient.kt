@@ -7,6 +7,7 @@
 package com.hubspot.mobilesdk.widget
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
@@ -19,6 +20,14 @@ import timber.log.Timber
  * HubspotWebViewClient class uses custom javascript and render the messages in the logs for the script
  */
 internal class HubspotWebViewClient : WebViewClient() {
+
+    val jsBridge = JSBridge()
+
+    override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+        super.onPageStarted(view, url, favicon)
+        jsBridge.reset()
+    }
+
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         injectJavaScript(view)
@@ -35,7 +44,7 @@ internal class HubspotWebViewClient : WebViewClient() {
      * Internal function to pass lambda to HubspotWebViewClient. This lambda will be invoked when JS evaluation on webview is complete
      */
     internal fun setActionAfterJsEvaluation(actionOnThreadIdFetched: (JsEvents) -> Unit) {
-        JSBridge.assignCallback(actionOnThreadIdFetched)
+        jsBridge.assignCallback(actionOnThreadIdFetched)
     }
 
     private fun injectJavaScript(webView: WebView?) {
@@ -84,10 +93,13 @@ internal class HubspotWebViewClient : WebViewClient() {
     /**
      * @suppress("NOT_DOCUMENTED")
      */
-    object JSBridge {
+    internal class JSBridge {
 
+        @Volatile
         private var conversationId: String? = null
-        private lateinit var callback: (JsEvents) -> Unit
+
+        @Volatile
+        private var callback: ((JsEvents) -> Unit)? = null
 
         /**
          * postMessage is used to show the logs with info and message when interacting with javascript
@@ -103,7 +115,7 @@ internal class HubspotWebViewClient : WebViewClient() {
         @JavascriptInterface
         fun postConversationId(conversationId: String) {
             this.conversationId = conversationId
-            callback.invoke(JsEvents.PostConversationIdEvent(conversationId))
+            dispatch(JsEvents.PostConversationIdEvent(conversationId))
         }
 
         /**
@@ -111,7 +123,7 @@ internal class HubspotWebViewClient : WebViewClient() {
          */
         @JavascriptInterface
         fun closeWebViewHost() {
-            callback.invoke(JsEvents.WebViewHostCloseEvent)
+            dispatch(JsEvents.WebViewHostCloseEvent)
         }
 
         /**
@@ -129,11 +141,20 @@ internal class HubspotWebViewClient : WebViewClient() {
         }
 
         /**
-         * Internal function to assign callback to the JSBridge object, responsible for interfacing with kotlin code and injected JS code.
+         * Internal function to assign callback to the JSBridge instance, responsible for interfacing with kotlin code and injected JS code.
          * @param callback lambda that will be invoked after manual JS evaluation  on current webpage
          */
         internal fun assignCallback(callback: (JsEvents) -> Unit) {
             this.callback = callback
+        }
+
+        internal fun reset() {
+            conversationId = null
+        }
+
+        private fun dispatch(event: JsEvents) {
+            callback?.invoke(event)
+                ?: Timber.e("HubspotWebViewClient:JS event $event dropped, no callback assigned")
         }
     }
 
