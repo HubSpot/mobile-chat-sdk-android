@@ -291,7 +291,7 @@ class HubspotManager private constructor(private val context: Context) {
         @JvmStatic
         fun getInstance(context: Context): HubspotManager {
             if (INSTANCE == null) {
-                INSTANCE = HubspotManager(context)
+                INSTANCE = HubspotManager(context.applicationContext)
             }
             return INSTANCE!!
         }
