@@ -18,8 +18,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.hubspot.mobilesdk.HubspotManager
 import com.hubspot.mobilesdk.HubspotWebActivity
 import com.hubspot.mobilesdk.R
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 import java.io.Serializable
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -35,9 +34,9 @@ open class HubspotFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         val manager = HubspotManager.getInstance(applicationContext)
         manager.configure()
-        runBlocking {
-            launch {
-                manager.setPushToken(token)
+        manager.setPushToken(token) { error ->
+            error?.let {
+                Timber.e(it, "HubspotFirebaseMessagingService:Push token registration failed")
             }
         }
     }
