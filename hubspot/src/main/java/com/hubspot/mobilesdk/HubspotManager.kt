@@ -37,7 +37,12 @@ import timber.log.Timber
  * It sends the PushToken to Hubspot API @see [setPushToken]
  **/
 class HubspotManager private constructor(private val context: Context) {
+
+    @Volatile
     private var hubspotConfig: HubspotConfig? = null
+
+    private val configureLock = Any()
+
     private var chatProperties: HashMap<String, String> = HashMap()
     private val hubspotPref = PreferenceHelper(context)
     val userIdentityEmail: String
@@ -94,22 +99,24 @@ class HubspotManager private constructor(private val context: Context) {
      * Does nothing if configure has already been called for this instance.
      **/
     fun configure() {
-        if (hubspotConfig != null) {
-            // Configuration already exists, no need to configure again
-            return
+        synchronized(configureLock) {
+            if (hubspotConfig != null) {
+                // Configuration already exists, no need to configure again
+                return
+            }
+
+            val jsonString = context.assets.open(defaultConfigFileName)
+                .bufferedReader()
+                .use { it.readText() }
+            val json = Json.decodeFromString<HubspotConfig>(jsonString)
+
+            configure(
+                environment = json.environment,
+                hublet = json.hublet,
+                portalId = json.portalId,
+                defaultChatFlow = json.defaultChatFlow,
+            )
         }
-
-        val jsonString = context.assets.open(defaultConfigFileName)
-            .bufferedReader()
-            .use { it.readText() }
-        val json = Json.decodeFromString<HubspotConfig>(jsonString)
-
-        configure(
-            environment = json.environment,
-            hublet = json.hublet,
-            portalId = json.portalId,
-            defaultChatFlow = json.defaultChatFlow,
-        )
     }
 
     /**
@@ -141,8 +148,10 @@ class HubspotManager private constructor(private val context: Context) {
             defaultChatFlow = defaultChatFlow,
         )
 
-        hubspotConfig = config
-        NetworkDependencies.configure(config)
+        synchronized(configureLock) {
+            hubspotConfig = config
+            NetworkDependencies.configure(config)
+        }
     }
 
     /**
@@ -166,10 +175,11 @@ class HubspotManager private constructor(private val context: Context) {
      **/
     @Throws(HubspotConfigError::class)
     fun chatURL(chatFlow: String? = null, pushData: PushNotificationChatData? = null): String {
-        val hublet = hubspotConfig?.hublet?.let { Hublet(it) } ?: throw HubspotConfigError.MissingHubletID
-        val portalId = hubspotConfig?.portalId ?: throw HubspotConfigError.MissingPortalID
-        val environment = hubspotConfig?.environment?.let { Environment(it) } ?: throw HubspotConfigError.MissingEnvironment
-        val defaultChatFlow = hubspotConfig?.defaultChatFlow
+        val config = hubspotConfig
+        val hublet = config?.hublet?.let { Hublet(it) } ?: throw HubspotConfigError.MissingHubletID
+        val portalId = config?.portalId ?: throw HubspotConfigError.MissingPortalID
+        val environment = config?.environment?.let { Environment(it) } ?: throw HubspotConfigError.MissingEnvironment
+        val defaultChatFlow = config?.defaultChatFlow
 
         val components = Uri.Builder()
             .scheme("https")
@@ -294,14 +304,18 @@ class HubspotManager private constructor(private val context: Context) {
      * @suppress("NOT_DOCUMENTED")
      */
     companion object {
+
+        @Volatile
         private var INSTANCE: HubspotManager? = null
+
+        private val instanceLock = Any()
 
         @JvmStatic
         fun getInstance(context: Context): HubspotManager {
-            if (INSTANCE == null) {
-                INSTANCE = HubspotManager(context.applicationContext)
+            INSTANCE?.let { return it }
+            return synchronized(instanceLock) {
+                INSTANCE ?: HubspotManager(context.applicationContext).also { INSTANCE = it }
             }
-            return INSTANCE!!
         }
 
         /**
