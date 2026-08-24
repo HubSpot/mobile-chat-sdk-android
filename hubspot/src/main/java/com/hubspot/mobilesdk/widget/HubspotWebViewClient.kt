@@ -48,6 +48,10 @@ internal class HubspotWebViewClient : WebViewClient() {
     }
 
     private fun injectJavaScript(webView: WebView?) {
+        if (webView == null) {
+            Timber.w("HubspotWebViewClient:JS injection skipped, page finished with no WebView")
+            return
+        }
         val script = """
             function configureHubspotConversations() {
                 if (window.HubSpotConversations) {
@@ -87,7 +91,7 @@ internal class HubspotWebViewClient : WebViewClient() {
             }
             nativeApp.postMessage("info","Finished main load script");
         """
-        webView!!.evaluateJavascript(script) { }
+        webView.evaluateJavascript(script) { }
     }
 
     /**
