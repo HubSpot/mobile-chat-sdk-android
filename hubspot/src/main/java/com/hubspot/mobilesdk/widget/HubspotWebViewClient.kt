@@ -6,15 +6,16 @@
  ************************************************/
 package com.hubspot.mobilesdk.widget
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.content.ContextCompat
 import timber.log.Timber
+import java.util.Locale
 
 /**
  * HubspotWebViewClient class uses custom javascript and render the messages in the logs for the script
@@ -22,6 +23,10 @@ import timber.log.Timber
 internal class HubspotWebViewClient : WebViewClient() {
 
     val jsBridge = JSBridge()
+
+    private companion object {
+        val blockedSchemes = setOf("javascript", "file", "data", "blob")
+    }
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)
@@ -35,8 +40,23 @@ internal class HubspotWebViewClient : WebViewClient() {
 
     // This method handles the navigation flow for links which opens default phone browser.
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-        val i = Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
-        view?.context?.let { ContextCompat.startActivity(it, i, null) }
+        val url = request?.url
+        val context = view?.context
+        if (url == null || context == null) return false
+
+        val scheme = url.scheme?.lowercase(Locale.ROOT)
+        if (scheme in blockedSchemes) {
+            Timber.w("HubspotWebViewClient:Blocked navigation to unsafe scheme $scheme")
+            return true
+        }
+
+        try {
+            ContextCompat.startActivity(context, Intent(Intent.ACTION_VIEW, url), null)
+        } catch (e: ActivityNotFoundException) {
+            Timber.w(e, "HubspotWebViewClient:Nothing on this device can open a $scheme link")
+        } catch (e: SecurityException) {
+            Timber.w(e, "HubspotWebViewClient:Not permitted to open a $scheme link")
+        }
         return true
     }
 
