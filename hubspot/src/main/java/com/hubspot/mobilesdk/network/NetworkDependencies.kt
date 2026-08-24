@@ -23,21 +23,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  */
 internal object NetworkDependencies {
 
+    @Volatile
     private var baseUrl = "https://api.hubapi.com/livechat-public/v1/mobile-sdk/"
+
+    @Volatile
     private var hubspotApi: HubspotApi? = null
 
     fun getHubspotApi(): HubspotApi {
-        if (hubspotApi == null) {
-            synchronized(this) {
-                hubspotApi = Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .client(createOkHttpClient())
-                    .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
-                    .build()
-                    .create(HubspotApi::class.java)
-            }
+        hubspotApi?.let { return it }
+        return synchronized(this) {
+            hubspotApi ?: buildHubspotApi().also { hubspotApi = it }
         }
-        return hubspotApi!!
     }
 
     fun configure(config: HubspotConfig) {
@@ -46,6 +42,15 @@ internal object NetworkDependencies {
         val configuredUrl = "https://${hublet.apiSubDomain}.hubapi${environment.chatURLSuffix}.com/livechat-public/v1/mobile-sdk/"
 
         baseUrl = configuredUrl
+    }
+
+    private fun buildHubspotApi(): HubspotApi {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(createOkHttpClient())
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
+            .build()
+            .create(HubspotApi::class.java)
     }
 
     private fun createOkHttpClient(): OkHttpClient {
