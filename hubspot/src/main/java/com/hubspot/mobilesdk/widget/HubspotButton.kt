@@ -6,7 +6,6 @@
  ************************************************/
 package com.hubspot.mobilesdk.widget
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
@@ -32,7 +31,7 @@ class HubspotButton @JvmOverloads constructor(
         setBackgroundColor(ContextCompat.getColor(context, R.color.orange))
         setTextColor(ContextCompat.getColor(context, R.color.white))
         setOnClickListener {
-            context.startActivity(Intent(context as Activity, HubspotWebActivity::class.java))
+            context.startActivity(Intent(context, HubspotWebActivity::class.java))
         }
     }
 }
