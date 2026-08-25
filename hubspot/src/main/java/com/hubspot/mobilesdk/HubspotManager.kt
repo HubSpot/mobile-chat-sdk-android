@@ -35,7 +35,7 @@ import timber.log.Timber
 /** HubspotManager class enable and disable logs @see [enableLogs] & @see[disableLogs]
  * It manages the configuration changes from the assets file @see [configure]
  * It also builds chatURL @see [chatURL]
- * It stores the email and token in memory @see [setUserIdentity]
+ * It persists the user's email and identity token on the device @see [setUserIdentity]
  * It sets chat properties for chat session @see [getChatProperties] & @see [setChatProperties]
  * It sends the PushToken to Hubspot API @see [setPushToken]
  **/
@@ -166,7 +166,7 @@ class HubspotManager private constructor(private val context: Context) {
 
     /**
      * Set the user identity token and email. These will be included when starting a chat session to identify the users.
-     * These values are only stored in memory and aren't persisted.
+     * These values are persisted on the device and aren't held in memory only.
      * These values are set when user use the setUserIdentity with passing email and token
      * @param token: The token from the identity api. Must not be empty.
      * @param email: The users email address, that matches the token. Must not be empty
