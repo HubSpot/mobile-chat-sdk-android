@@ -36,6 +36,10 @@ class HubspotWebView @JvmOverloads constructor(
     private var hsThreadId: String? = null
 
     private val hubspotWebViewClient = HubspotWebViewClient()
+
+    private val defaultUserAgent: String? = settings.userAgentString
+
+    private var isChatWiringInstalled = false
     private var chatScreenCloseListener: (() -> Unit)? = null
     private val onThreadIdFetched: (HubspotWebViewClient.JsEvents) -> Unit = { event ->
         when (event) {
@@ -96,12 +100,16 @@ class HubspotWebView @JvmOverloads constructor(
             return
         }
         isFocusableInTouchMode = true
-        val userAgent = "${settings.userAgentString}$HUBSPOT_MOBILE_CONFIG/${BuildConfig.version}"
-        settings.userAgentString = userAgent
+        settings.userAgentString = "$defaultUserAgent$HUBSPOT_MOBILE_CONFIG/${BuildConfig.version}"
         settings.javaScriptEnabled = true
-        webViewClient = hubspotWebViewClient
-        hubspotWebViewClient.setActionAfterJsEvaluation(onThreadIdFetched)
-        addJavascriptInterface(hubspotWebViewClient.jsBridge, JAVASCRIPT_INTERFACE_NAME)
+
+        if (!isChatWiringInstalled) {
+            webViewClient = hubspotWebViewClient
+            hubspotWebViewClient.setActionAfterJsEvaluation(onThreadIdFetched)
+            addJavascriptInterface(hubspotWebViewClient.jsBridge, JAVASCRIPT_INTERFACE_NAME)
+            isChatWiringInstalled = true
+        }
+
         val headers = HashMap<String, String>()
         headers["Accept-Language"] = Locale.getDefault().toString()
         loadUrl(chatURL, headers)
