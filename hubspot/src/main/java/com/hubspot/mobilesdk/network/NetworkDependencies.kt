@@ -41,7 +41,12 @@ internal object NetworkDependencies {
         val environment = Environment(config.environment)
         val configuredUrl = "https://${hublet.apiSubDomain}.hubapi${environment.chatURLSuffix}.com/livechat-public/v1/mobile-sdk/"
 
-        baseUrl = configuredUrl
+        synchronized(this) {
+            if (configuredUrl == baseUrl) return
+
+            baseUrl = configuredUrl
+            hubspotApi = null
+        }
     }
 
     private fun buildHubspotApi(): HubspotApi {
