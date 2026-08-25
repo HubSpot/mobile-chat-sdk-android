@@ -67,7 +67,7 @@ internal data class Hublet(val id: String) {
 /**
  * Hubspot Configuration Error class represents different errors when missing properties
  */
-internal sealed class HubspotConfigError : Throwable() {
+internal sealed class HubspotConfigError : RuntimeException() {
     /**
      * Shows error when hublet id is missing
      */

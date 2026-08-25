@@ -16,15 +16,7 @@ internal object HubspotErrorTransformer : ErrorTransformer {
 
     override fun transform(error: Throwable): Throwable {
         return when (error) {
-            is RuntimeException -> when (error) {
-                is HubspotConfigError.MissingHubletID,
-                is HubspotConfigError.MissingPortalID,
-                is HubspotConfigError.MissingEnvironment,
-                is HubspotConfigError.AddNewDeviceTokenAPIFailure,
-                -> NetworkError.Data.MissingParams(error.message ?: "Couldn't find parameter")
-
-                else -> NetworkError.Data.Generic
-            }
+            is HubspotConfigError -> NetworkError.Data.MissingParams(error.message ?: "Couldn't find parameter")
 
             else -> error
         }
