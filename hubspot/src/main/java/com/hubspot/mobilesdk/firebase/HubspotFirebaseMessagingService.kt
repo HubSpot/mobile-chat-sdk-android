@@ -33,7 +33,14 @@ open class HubspotFirebaseMessagingService : FirebaseMessagingService() {
      */
     override fun onNewToken(token: String) {
         val manager = HubspotManager.getInstance(applicationContext)
-        manager.configure()
+        try {
+            manager.configure()
+        } catch (error: Exception) {
+            Timber.e(
+                error,
+                "Hubspot SDK is not configured — check that hubspot-info.json exists in your app's assets folder and defines environment ('qa' or 'prod'), hublet, portalId and defaultChatFlow, or configure the SDK programmatically with those values"
+            )
+        }
         manager.setPushToken(token) { error ->
             error?.let {
                 Timber.e(it, "HubspotFirebaseMessagingService:Push token registration failed")

@@ -16,18 +16,19 @@ import java.util.Locale
  */
 internal enum class HubspotEnvironment(val value: String) {
     QA("qa"),
-    PRODUCTION("prod")
+    PRODUCTION("prod");
+
+    companion object {
+        fun from(name: String): HubspotEnvironment? {
+            val normalised = name.trim().lowercase(Locale.ROOT)
+            return entries.firstOrNull { it.value == normalised }
+        }
+    }
 }
 
 internal data class Environment(private val env: String) {
     val environment: HubspotEnvironment
-        get() {
-            return if (this.env == HubspotEnvironment.QA.value) {
-                HubspotEnvironment.QA
-            } else {
-                HubspotEnvironment.PRODUCTION
-            }
-        }
+        get() = HubspotEnvironment.from(env) ?: throw HubspotConfigError.MissingEnvironment
 
     val chatURLSuffix: String
         get() {

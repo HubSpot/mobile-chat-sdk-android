@@ -85,8 +85,16 @@ class HubspotWebView @JvmOverloads constructor(
      */
     fun show(chatFlow: String? = null, pushData: PushNotificationChatData? = null) {
         this.hsThreadId = pushData?.threadId
-        manager.configure()
-        val chatURL = manager.chatURL(chatFlow, pushData)
+        val chatURL = try {
+            manager.configure()
+            manager.chatURL(chatFlow, pushData)
+        } catch (error: Exception) {
+            Timber.e(
+                error,
+                "Hubspot SDK is not configured — check that hubspot-info.json exists in your app's assets folder and defines environment ('qa' or 'prod'), hublet, portalId and defaultChatFlow, or configure the SDK programmatically with those values"
+            )
+            return
+        }
         isFocusableInTouchMode = true
         val userAgent = "${settings.userAgentString}$HUBSPOT_MOBILE_CONFIG/${BuildConfig.version}"
         settings.userAgentString = userAgent

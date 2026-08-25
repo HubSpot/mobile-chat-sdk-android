@@ -14,6 +14,7 @@ import com.hubspot.mobilesdk.config.Hublet
 import com.hubspot.mobilesdk.config.HubspotConfig
 import com.hubspot.mobilesdk.config.HubspotConfig.Companion.defaultConfigFileName
 import com.hubspot.mobilesdk.config.HubspotConfigError
+import com.hubspot.mobilesdk.config.HubspotEnvironment
 import com.hubspot.mobilesdk.util.PreferenceHelper
 import com.hubspot.mobilesdk.errorhandling.NetworkError
 import com.hubspot.mobilesdk.firebase.PushNotificationChatData
@@ -132,7 +133,7 @@ class HubspotManager private constructor(private val context: Context) {
      * This is useful when configuration values are retrieved securely from a backend
      * service after authentication or during runtime.
      *
-     * @param environment HubSpot environment identifier (e.g. "prod", "qa", "test").
+     * @param environment HubSpot environment identifier (e.g. "prod", "qa").
      * @param hublet HubSpot data center identifier (e.g. "na1", "eu1").
      * @param portalId HubSpot portal identifier.
      * @param defaultChatFlow Default HubSpot chat flow identifier.
@@ -145,6 +146,11 @@ class HubspotManager private constructor(private val context: Context) {
         portalId: String,
         defaultChatFlow: String,
     ) {
+        if (hublet.isBlank()) throw HubspotConfigError.MissingHubletID
+        if (portalId.isBlank()) throw HubspotConfigError.MissingPortalID
+        if (defaultChatFlow.isBlank()) throw HubspotConfigError.MissingDefaultChatFlow
+        HubspotEnvironment.from(environment) ?: throw HubspotConfigError.MissingEnvironment
+
         val config = HubspotConfig(
             environment = environment,
             hublet = hublet,
