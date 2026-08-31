@@ -96,12 +96,13 @@ class HubspotWebActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         if (intent?.action == HubspotFirebaseMessagingService.PUSH_ACTION) {
             pushNotificationPermissionGrant(NotificationManagerCompat.from(this).areNotificationsEnabled())
-            val appIntent = Intent(this, HubspotWebActivity::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.putExtra(HS_PUSH_DATA, intent.extras?.getSerializable(HS_PUSH_DATA, PushNotificationChatData::class.java))
+            val pushData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.extras?.getSerializable(HS_PUSH_DATA, PushNotificationChatData::class.java)
             } else {
-                intent.putExtra(HS_PUSH_DATA, intent.getSerializableExtra(HS_PUSH_DATA))
+                intent.getSerializableExtra(HS_PUSH_DATA) as PushNotificationChatData?
             }
+            val appIntent = Intent(this, HubspotWebActivity::class.java)
+            appIntent.putExtra(HS_PUSH_DATA, pushData)
             startActivity(appIntent)
         }
     }
