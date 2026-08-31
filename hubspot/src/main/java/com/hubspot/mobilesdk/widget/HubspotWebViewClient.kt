@@ -130,7 +130,7 @@ internal class HubspotWebViewClient : WebViewClient() {
          */
         @JavascriptInterface
         fun postMessage(info: String, message: String) {
-            Timber.e("$info:$message")
+            Timber.d("$info:$message")
         }
 
         /**
