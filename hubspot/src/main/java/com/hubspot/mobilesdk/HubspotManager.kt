@@ -22,9 +22,7 @@ import com.hubspot.mobilesdk.model.DeviceTokenParams
 import com.hubspot.mobilesdk.network.NetworkDependencies
 import com.hubspot.mobilesdk.usecases.AddNewDeviceTokenUseCase
 import com.hubspot.mobilesdk.usecases.DeleteDeviceTokenUseCase
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -57,8 +55,6 @@ class HubspotManager private constructor(private val context: Context) {
         get() = hubspotPref.fcmToken.toString()
 
     private var loggingTree: Timber.Tree? = null
-
-    private val callbackScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     /**
      * Writes a log line marking the start of a chat.
@@ -290,21 +286,6 @@ class HubspotManager private constructor(private val context: Context) {
             hubspotPref.fcmToken = response.devicePushToken
         } catch (error: NetworkError) {
             Timber.e(HubspotConfigError.AddNewDeviceTokenAPIFailure.message)
-        }
-    }
-
-    fun setPushToken(pushToken: String, callback: HubspotCallback) =
-        runWithCallback(callback) { setPushToken(pushToken) }
-
-    private fun runWithCallback(callback: HubspotCallback, block: suspend () -> Unit) {
-        callbackScope.launch {
-            val error = try {
-                block()
-                null
-            } catch (throwable: Throwable) {
-                throwable
-            }
-            callback.onComplete(error)
         }
     }
 

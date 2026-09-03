@@ -18,6 +18,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.hubspot.mobilesdk.HubspotManager
 import com.hubspot.mobilesdk.HubspotWebActivity
 import com.hubspot.mobilesdk.R
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.io.Serializable
 import kotlin.random.Random
@@ -41,10 +42,12 @@ open class HubspotFirebaseMessagingService : FirebaseMessagingService() {
                 "Hubspot SDK is not configured — check that hubspot-info.json exists in your app's assets folder and defines environment ('qa' or 'prod'), hublet, portalId and defaultChatFlow, or configure the SDK programmatically with those values"
             )
         }
-        manager.setPushToken(token) { error ->
-            error?.let {
-                Timber.e(it, "HubspotFirebaseMessagingService:Push token registration failed")
-            }
+        // Registration is deliberately blocking: FCM calls onNewToken on a background thread and
+        // keeps this service alive only until it returns.
+        try {
+            runBlocking { manager.setPushToken(token) }
+        } catch (error: Exception) {
+            Timber.e(error, "HubspotFirebaseMessagingService:Push token registration failed")
         }
     }
 
