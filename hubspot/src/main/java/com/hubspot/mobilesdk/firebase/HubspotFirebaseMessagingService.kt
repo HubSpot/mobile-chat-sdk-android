@@ -18,10 +18,9 @@ import com.google.firebase.messaging.RemoteMessage
 import com.hubspot.mobilesdk.HubspotManager
 import com.hubspot.mobilesdk.HubspotWebActivity
 import com.hubspot.mobilesdk.R
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 import java.io.Serializable
-import javax.inject.Singleton
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -29,18 +28,26 @@ import kotlin.random.nextInt
 /**
  * This class represents the Hubspot Push Notifications from the Firebase Cloud Messaging Service
  */
-@Singleton
 open class HubspotFirebaseMessagingService : FirebaseMessagingService() {
     /**
      * This method is used when FCM send the token for the first time
      */
     override fun onNewToken(token: String) {
         val manager = HubspotManager.getInstance(applicationContext)
-        manager.configure()
-        runBlocking {
-            launch {
-                manager.setPushToken(token)
-            }
+        try {
+            manager.configure()
+        } catch (error: Exception) {
+            Timber.e(
+                error,
+                "Hubspot SDK is not configured — check that hubspot-info.json exists in your app's assets folder and defines environment ('qa' or 'prod'), hublet, portalId and defaultChatFlow, or configure the SDK programmatically with those values"
+            )
+        }
+        // Registration is deliberately blocking: FCM calls onNewToken on a background thread and
+        // keeps this service alive only until it returns.
+        try {
+            runBlocking { manager.setPushToken(token) }
+        } catch (error: Exception) {
+            Timber.e(error, "HubspotFirebaseMessagingService:Push token registration failed")
         }
     }
 

@@ -34,6 +34,12 @@ class HubspotWebView @JvmOverloads constructor(
 ) : WebView(context, attrs, defStyleAttr) {
     private var manager: HubspotManager = HubspotManager.getInstance(context)
     private var hsThreadId: String? = null
+
+    private val hubspotWebViewClient = HubspotWebViewClient()
+
+    private val defaultUserAgent: String? = settings.userAgentString
+
+    private var isChatWiringInstalled = false
     private var chatScreenCloseListener: (() -> Unit)? = null
     private val onThreadIdFetched: (HubspotWebViewClient.JsEvents) -> Unit = { event ->
         when (event) {
@@ -62,9 +68,9 @@ class HubspotWebView @JvmOverloads constructor(
 
                 else -> {
                     try {
-                        if (HubspotWebViewClient.JSBridge.isConversationIdAvailable()) {
+                        if (hubspotWebViewClient.jsBridge.isConversationIdAvailable()) {
                             CompileAndUploadMetaDataUseCase(manager, context)
-                                .setParameters(HubspotWebViewClient.JSBridge.retrieveConversationId())
+                                .setParameters(hubspotWebViewClient.jsBridge.retrieveConversationId())
                                 .execute()
                         }
                     } catch (error: NetworkError) {
@@ -83,15 +89,27 @@ class HubspotWebView @JvmOverloads constructor(
      */
     fun show(chatFlow: String? = null, pushData: PushNotificationChatData? = null) {
         this.hsThreadId = pushData?.threadId
-        manager.configure()
-        val chatURL = manager.chatURL(chatFlow, pushData)
+        val chatURL = try {
+            manager.configure()
+            manager.chatURL(chatFlow, pushData)
+        } catch (error: Exception) {
+            Timber.e(
+                error,
+                "Hubspot SDK is not configured — check that hubspot-info.json exists in your app's assets folder and defines environment ('qa' or 'prod'), hublet, portalId and defaultChatFlow, or configure the SDK programmatically with those values"
+            )
+            return
+        }
         isFocusableInTouchMode = true
-        val userAgent = "${settings.userAgentString}$HUBSPOT_MOBILE_CONFIG/${BuildConfig.version}"
-        settings.userAgentString = userAgent
+        settings.userAgentString = "$defaultUserAgent$HUBSPOT_MOBILE_CONFIG/${BuildConfig.version}"
         settings.javaScriptEnabled = true
-        webViewClient = HubspotWebViewClient()
-        (webViewClient as HubspotWebViewClient).setActionAfterJsEvaluation(onThreadIdFetched)
-        addJavascriptInterface(HubspotWebViewClient.JSBridge, JAVASCRIPT_INTERFACE_NAME)
+
+        if (!isChatWiringInstalled) {
+            webViewClient = hubspotWebViewClient
+            hubspotWebViewClient.setActionAfterJsEvaluation(onThreadIdFetched)
+            addJavascriptInterface(hubspotWebViewClient.jsBridge, JAVASCRIPT_INTERFACE_NAME)
+            isChatWiringInstalled = true
+        }
+
         val headers = HashMap<String, String>()
         headers["Accept-Language"] = Locale.getDefault().toString()
         loadUrl(chatURL, headers)

@@ -6,6 +6,7 @@
  ************************************************/
 package com.hubspot.mobilesdk.errorhandling
 
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InterruptedIOException
 import java.net.BindException
@@ -27,6 +28,8 @@ internal object ConnectivityErrorTransformer : ErrorTransformer {
     override fun transform(error: Throwable) =
         when (error) {
             is IOException -> when (error) {
+                is FileNotFoundException -> error
+
                 is SocketTimeoutException -> NetworkError.Connectivity.Timeout
                 is BindException,
                 is ClosedChannelException,

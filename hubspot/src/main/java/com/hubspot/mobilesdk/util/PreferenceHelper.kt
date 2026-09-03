@@ -12,7 +12,7 @@ import android.content.SharedPreferences
 /**
  * The PreferenceHelper class used to store the email and token for the hubspot configuration
  */
-class PreferenceHelper(context: Context) {
+internal class PreferenceHelper(context: Context) {
     private val preferences: SharedPreferences = context.getSharedPreferences(hubspotPreferences, Context.MODE_PRIVATE)
 
     var email: String?
@@ -28,9 +28,11 @@ class PreferenceHelper(context: Context) {
         set(value) = preferences.edit().putString(prefFCMToken, value).apply()
 
     fun removePreferences() {
-        preferences.edit().remove(prefEmail).apply()
-        preferences.edit().remove(prefToken).apply()
-        preferences.edit().remove(prefFCMToken).apply()
+        preferences.edit()
+            .remove(prefEmail)
+            .remove(prefToken)
+            .remove(prefFCMToken)
+            .apply()
     }
 
     fun removeFcmToken() {

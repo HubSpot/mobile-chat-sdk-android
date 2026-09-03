@@ -17,19 +17,16 @@ import java.io.FileNotFoundException
  */
 @Suppress("MagicNumber")
 internal object ApiErrorTransformer : ErrorTransformer {
-    override fun transform(error: Throwable) =
+    override fun transform(error: Throwable): Throwable =
         when (error) {
-            is RuntimeException -> when (error) {
-                is JsonDataException -> Data.Parsing(error.message)
-                is IllegalArgumentException -> Data.IllegalArgument(error.message)
-                is NullPointerException,
-                is IndexOutOfBoundsException,
-                is FileNotFoundException,
-                -> Data.Null(error.message)
+            is JsonDataException -> Data.Parsing(error.message)
+            is IllegalArgumentException -> Data.IllegalArgument(error.message)
+            is NullPointerException,
+            is IndexOutOfBoundsException,
+            is FileNotFoundException,
+            -> Data.Null(error.message)
 
-                is HttpException -> handleHTTPException(error)
-                else -> Data.Generic
-            }
+            is HttpException -> handleHTTPException(error)
 
             else -> error
         }

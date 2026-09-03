@@ -6,6 +6,7 @@
  ************************************************/
 package com.hubspot.mobilesdk
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -14,6 +15,7 @@ import android.view.View
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.ViewCompat
@@ -24,6 +26,7 @@ import com.hubspot.mobilesdk.firebase.HubspotFirebaseMessagingService
 import com.hubspot.mobilesdk.firebase.HubspotFirebaseMessagingService.Companion.HS_PUSH_DATA
 import com.hubspot.mobilesdk.firebase.PushNotificationChatData
 import com.hubspot.mobilesdk.metadata.ChatPropertyKey
+import timber.log.Timber
 
 /**
  * HubspotWebActivity class manages the File Uploading (including image, videos, any type of file etc.)
@@ -33,6 +36,12 @@ class HubspotWebActivity : AppCompatActivity() {
 
     private var fileUploadCallback: ValueCallback<Array<Uri>>? = null
     private val manager = HubspotManager.getInstance(this)
+
+    private val fileChooserLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val uris = WebChromeClient.FileChooserParams.parseResult(result.resultCode, result.data)
+        fileUploadCallback?.onReceiveValue(uris)
+        fileUploadCallback = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +68,20 @@ class HubspotWebActivity : AppCompatActivity() {
                     // More Info: https://developer.android.com/reference/android/webkit/WebChromeClient.html?authuser=1#onShowFileChooser(android.webkit.WebView,%20android.webkit.ValueCallback%3Candroid.net.Uri[]%3E,%20android.webkit.WebChromeClient.FileChooserParams)
                     fileUploadCallback?.onReceiveValue(null)
                     fileUploadCallback = filePathCallback
-                    val intent = Intent(Intent.ACTION_GET_CONTENT)
-                    intent.addCategory(Intent.CATEGORY_OPENABLE)
-                    intent.type = "*/*"
+                    val intent = fileChooserParams?.createIntent() ?: Intent(Intent.ACTION_GET_CONTENT).apply {
+                        addCategory(Intent.CATEGORY_OPENABLE)
+                        type = "*/*"
+                    }
                     val chooserIntent = Intent.createChooser(intent, getString(R.string.choose_file))
-                    this@HubspotWebActivity.startActivityForResult(chooserIntent, FILE_CHOOSER_REQUEST_CODE)
-                    return true
+                    return try {
+                        fileChooserLauncher.launch(chooserIntent)
+                        true
+                    } catch (ex: ActivityNotFoundException) {
+                        Timber.e(ex, "HubspotWebActivity:No activity available to choose a file")
+                        fileUploadCallback?.onReceiveValue(null)
+                        fileUploadCallback = null
+                        false
+                    }
                 }
             }
         }
@@ -79,30 +96,14 @@ class HubspotWebActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         if (intent?.action == HubspotFirebaseMessagingService.PUSH_ACTION) {
             pushNotificationPermissionGrant(NotificationManagerCompat.from(this).areNotificationsEnabled())
-            val appIntent = Intent(this, HubspotWebActivity::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.putExtra(HS_PUSH_DATA, intent.extras?.getSerializable(HS_PUSH_DATA, PushNotificationChatData::class.java))
+            val pushData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.extras?.getSerializable(HS_PUSH_DATA, PushNotificationChatData::class.java)
             } else {
-                intent.putExtra(HS_PUSH_DATA, intent.getSerializableExtra(HS_PUSH_DATA))
+                intent.getSerializableExtra(HS_PUSH_DATA) as PushNotificationChatData?
             }
+            val appIntent = Intent(this, HubspotWebActivity::class.java)
+            appIntent.putExtra(HS_PUSH_DATA, pushData)
             startActivity(appIntent)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
-            if (fileUploadCallback == null) {
-                super.onActivityResult(requestCode, resultCode, data)
-                return
-            }
-            val results: Array<Uri>? = when {
-                resultCode == RESULT_OK && data?.data != null -> arrayOf(data.data!!)
-                else -> null
-            }
-            fileUploadCallback?.onReceiveValue(results)
-            fileUploadCallback = null
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 

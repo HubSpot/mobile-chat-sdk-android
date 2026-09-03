@@ -86,8 +86,10 @@ hubspotManager.setChatProperties(keyValuePair)
 
 ### Clearing Data On Logout
 
-The SDK stores in memory identification tokens, email address, and any properties set. The push
-token for the app is also associated with the current user , if applicable.
+The SDK holds the identification token, the email address, the push token and any properties set.
+The identification token, email and push token are stored on the device and survive the app
+being killed. The chat properties are held in memory only and go when the process does. The push
+token for the app is also associated with the current user, if applicable.
 There are situations where you know you might want to clear this data, such as during a logout or
 changing user in a multi user app.
 To clear this data, call `HubspotManager.logout()` at an appropriate time in in your app. 

@@ -6,19 +6,33 @@
  ************************************************/
 package com.hubspot.mobilesdk.widget
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Bitmap
 import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.content.ContextCompat
 import timber.log.Timber
+import java.util.Locale
 
 /**
  * HubspotWebViewClient class uses custom javascript and render the messages in the logs for the script
  */
 internal class HubspotWebViewClient : WebViewClient() {
+
+    val jsBridge = JSBridge()
+
+    private companion object {
+        val blockedSchemes = setOf("javascript", "file", "data", "blob")
+    }
+
+    override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+        super.onPageStarted(view, url, favicon)
+        jsBridge.reset()
+    }
+
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         injectJavaScript(view)
@@ -26,8 +40,23 @@ internal class HubspotWebViewClient : WebViewClient() {
 
     // This method handles the navigation flow for links which opens default phone browser.
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-        val i = Intent(Intent.ACTION_VIEW, Uri.parse(request?.url.toString()))
-        view?.context?.let { ContextCompat.startActivity(it, i, null) }
+        val url = request?.url
+        val context = view?.context
+        if (url == null || context == null) return false
+
+        val scheme = url.scheme?.lowercase(Locale.ROOT)
+        if (scheme in blockedSchemes) {
+            Timber.w("HubspotWebViewClient:Blocked navigation to unsafe scheme $scheme")
+            return true
+        }
+
+        try {
+            ContextCompat.startActivity(context, Intent(Intent.ACTION_VIEW, url), null)
+        } catch (e: ActivityNotFoundException) {
+            Timber.w(e, "HubspotWebViewClient:Nothing on this device can open a $scheme link")
+        } catch (e: SecurityException) {
+            Timber.w(e, "HubspotWebViewClient:Not permitted to open a $scheme link")
+        }
         return true
     }
 
@@ -35,10 +64,14 @@ internal class HubspotWebViewClient : WebViewClient() {
      * Internal function to pass lambda to HubspotWebViewClient. This lambda will be invoked when JS evaluation on webview is complete
      */
     internal fun setActionAfterJsEvaluation(actionOnThreadIdFetched: (JsEvents) -> Unit) {
-        JSBridge.assignCallback(actionOnThreadIdFetched)
+        jsBridge.assignCallback(actionOnThreadIdFetched)
     }
 
     private fun injectJavaScript(webView: WebView?) {
+        if (webView == null) {
+            Timber.w("HubspotWebViewClient:JS injection skipped, page finished with no WebView")
+            return
+        }
         val script = """
             function configureHubspotConversations() {
                 if (window.HubSpotConversations) {
@@ -78,23 +111,26 @@ internal class HubspotWebViewClient : WebViewClient() {
             }
             nativeApp.postMessage("info","Finished main load script");
         """
-        webView!!.evaluateJavascript(script) { }
+        webView.evaluateJavascript(script) { }
     }
 
     /**
      * @suppress("NOT_DOCUMENTED")
      */
-    object JSBridge {
+    internal class JSBridge {
 
+        @Volatile
         private var conversationId: String? = null
-        private lateinit var callback: (JsEvents) -> Unit
+
+        @Volatile
+        private var callback: ((JsEvents) -> Unit)? = null
 
         /**
          * postMessage is used to show the logs with info and message when interacting with javascript
          */
         @JavascriptInterface
         fun postMessage(info: String, message: String) {
-            Timber.e("$info:$message")
+            Timber.d("$info:$message")
         }
 
         /**
@@ -103,7 +139,7 @@ internal class HubspotWebViewClient : WebViewClient() {
         @JavascriptInterface
         fun postConversationId(conversationId: String) {
             this.conversationId = conversationId
-            callback.invoke(JsEvents.PostConversationIdEvent(conversationId))
+            dispatch(JsEvents.PostConversationIdEvent(conversationId))
         }
 
         /**
@@ -111,7 +147,7 @@ internal class HubspotWebViewClient : WebViewClient() {
          */
         @JavascriptInterface
         fun closeWebViewHost() {
-            callback.invoke(JsEvents.WebViewHostCloseEvent)
+            dispatch(JsEvents.WebViewHostCloseEvent)
         }
 
         /**
@@ -129,15 +165,24 @@ internal class HubspotWebViewClient : WebViewClient() {
         }
 
         /**
-         * Internal function to assign callback to the JSBridge object, responsible for interfacing with kotlin code and injected JS code.
+         * Internal function to assign callback to the JSBridge instance, responsible for interfacing with kotlin code and injected JS code.
          * @param callback lambda that will be invoked after manual JS evaluation  on current webpage
          */
         internal fun assignCallback(callback: (JsEvents) -> Unit) {
             this.callback = callback
         }
+
+        internal fun reset() {
+            conversationId = null
+        }
+
+        private fun dispatch(event: JsEvents) {
+            callback?.invoke(event)
+                ?: Timber.e("HubspotWebViewClient:JS event $event dropped, no callback assigned")
+        }
     }
 
-    sealed class JsEvents {
+    internal sealed class JsEvents {
         data class PostConversationIdEvent(val conversationId: String): JsEvents()
         data object WebViewHostCloseEvent: JsEvents()
     }

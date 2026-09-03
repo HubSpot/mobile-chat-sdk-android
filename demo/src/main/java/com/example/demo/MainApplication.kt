@@ -4,6 +4,7 @@ import android.app.Application
 import com.hubspot.mobilesdk.HubspotManager
 import com.hubspot.mobilesdk.metadata.ChatPropertyKey
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -15,8 +16,11 @@ class MainApplication : Application() {
         super.onCreate()
 
         hubspotManager.enableLogs()
-        hubspotManager.configure()
-        hubspotManager.startChat()
+        try {
+            hubspotManager.configure()
+        } catch (error: Throwable) {
+            Timber.e(error, "Hubspot SDK not configured — check hubspot-info.json in demo/src/main/assets")
+        }
         hubspotManager.setChatProperties(
             mapOf(
                 ChatPropertyKey.CameraPermissions.chatPropertyValue to "false",

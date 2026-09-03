@@ -11,7 +11,6 @@ import com.hubspot.mobilesdk.BuildConfig
 import com.hubspot.mobilesdk.config.Environment
 import com.hubspot.mobilesdk.config.Hublet
 import com.hubspot.mobilesdk.config.HubspotConfig
-import com.hubspot.mobilesdk.config.HubspotConfigError
 import com.hubspot.mobilesdk.metadata.HubspotApi
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -24,21 +23,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  */
 internal object NetworkDependencies {
 
+    @Volatile
     private var baseUrl = "https://api.hubapi.com/livechat-public/v1/mobile-sdk/"
+
+    @Volatile
     private var hubspotApi: HubspotApi? = null
 
     fun getHubspotApi(): HubspotApi {
-        if (hubspotApi == null) {
-            synchronized(this) {
-                hubspotApi = Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .client(createOkHttpClient())
-                    .addConverterFactory(createMoshiConverterFactory(createMoshi()))
-                    .build()
-                    .create(HubspotApi::class.java)
-            }
+        hubspotApi?.let { return it }
+        return synchronized(this) {
+            hubspotApi ?: buildHubspotApi().also { hubspotApi = it }
         }
-        return hubspotApi!!
     }
 
     fun configure(config: HubspotConfig) {
@@ -46,15 +41,21 @@ internal object NetworkDependencies {
         val environment = Environment(config.environment)
         val configuredUrl = "https://${hublet.apiSubDomain}.hubapi${environment.chatURLSuffix}.com/livechat-public/v1/mobile-sdk/"
 
-        baseUrl = configuredUrl
+        synchronized(this) {
+            if (configuredUrl == baseUrl) return
+
+            baseUrl = configuredUrl
+            hubspotApi = null
+        }
     }
 
-    private fun createMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
-        return MoshiConverterFactory.create(moshi)
-    }
-
-    private fun createMoshi(): Moshi {
-        return Moshi.Builder().build()
+    private fun buildHubspotApi(): HubspotApi {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(createOkHttpClient())
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
+            .build()
+            .create(HubspotApi::class.java)
     }
 
     private fun createOkHttpClient(): OkHttpClient {

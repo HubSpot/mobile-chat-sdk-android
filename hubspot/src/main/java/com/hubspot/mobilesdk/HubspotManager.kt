@@ -32,15 +32,20 @@ import timber.log.Timber
 
 /** HubspotManager class enable and disable logs @see [enableLogs] & @see[disableLogs]
  * It manages the configuration changes from the assets file @see [configure]
- * It also builds chatURL @see [chatUrl]
- * It stores the email and token in memory @see [setUserIdentity]
+ * It also builds chatURL @see [chatURL]
+ * It persists the user's email and identity token on the device @see [setUserIdentity]
  * It sets chat properties for chat session @see [getChatProperties] & @see [setChatProperties]
  * It sends the PushToken to Hubspot API @see [setPushToken]
  **/
 class HubspotManager private constructor(private val context: Context) {
+
+    @Volatile
     private var hubspotConfig: HubspotConfig? = null
+
+    private val configureLock = Any()
+    private val logsLock = Any()
+
     private var chatProperties: HashMap<String, String> = HashMap()
-    private var chatUrl: String = ""
     private val hubspotPref = PreferenceHelper(context)
     val userIdentityEmail: String
         get() = hubspotPref.email.toString()
@@ -49,28 +54,43 @@ class HubspotManager private constructor(private val context: Context) {
     private val fcmToken: String
         get() = hubspotPref.fcmToken.toString()
 
+    private var loggingTree: Timber.Tree? = null
+
     /**
-     * Shares the logs with chat started
+     * Writes a log line marking the start of a chat.
      **/
+    @Deprecated(
+        message = "startChat() only logs. Launch HubspotWebActivity or use one of the chat widgets instead.",
+    )
     fun startChat() {
         Timber.w("CHAT STARTED..!!")
     }
 
     /**
-     * Enable the logs
+     * Enable the logs.
      **/
     fun enableLogs() {
-        Timber.plant(object : Timber.DebugTree() {
-            override fun createStackElementTag(element: StackTraceElement) =
-                "(${element.fileName}:${element.lineNumber})"
-        })
+        synchronized(logsLock) {
+            if (loggingTree != null) return
+            val tree = object : Timber.DebugTree() {
+                override fun createStackElementTag(element: StackTraceElement) =
+                    "(${element.fileName}:${element.lineNumber})"
+            }
+            loggingTree = tree
+            Timber.plant(tree)
+        }
     }
 
     /**
-     * Disable the logs
+     * Disable the logs.
      **/
     fun disableLogs() {
-        Timber.uprootAll()
+        synchronized(logsLock) {
+            loggingTree?.let {
+                Timber.uproot(it)
+                loggingTree = null
+            }
+        }
     }
 
     /**
@@ -85,23 +105,24 @@ class HubspotManager private constructor(private val context: Context) {
      * Does nothing if configure has already been called for this instance.
      **/
     fun configure() {
-        if (hubspotConfig != null) {
-            // Configuration already exists, no need to configure again
-            return
+        synchronized(configureLock) {
+            if (hubspotConfig != null) {
+                // Configuration already exists, no need to configure again
+                return
+            }
+
+            val jsonString = context.assets.open(defaultConfigFileName)
+                .bufferedReader()
+                .use { it.readText() }
+            val json = Json.decodeFromString<HubspotConfig>(jsonString)
+
+            configure(
+                environment = json.environment,
+                hublet = json.hublet,
+                portalId = json.portalId,
+                defaultChatFlow = json.defaultChatFlow,
+            )
         }
-
-        val jsonFileName = defaultConfigFileName
-        val jsonString = context.assets.open(jsonFileName)
-            .bufferedReader()
-            .use { it.readText() }
-        val json = Json.decodeFromString<HubspotConfig>(jsonString)
-
-        configure(
-            environment = json.environment,
-            hublet = json.hublet,
-            portalId = json.portalId,
-            defaultChatFlow = json.defaultChatFlow,
-        )
     }
 
     /**
@@ -113,7 +134,7 @@ class HubspotManager private constructor(private val context: Context) {
      * This is useful when configuration values are retrieved securely from a backend
      * service after authentication or during runtime.
      *
-     * @param environment HubSpot environment identifier (e.g. "prod", "qa", "test").
+     * @param environment HubSpot environment identifier (e.g. "prod", "qa").
      * @param hublet HubSpot data center identifier (e.g. "na1", "eu1").
      * @param portalId HubSpot portal identifier.
      * @param defaultChatFlow Default HubSpot chat flow identifier.
@@ -126,6 +147,11 @@ class HubspotManager private constructor(private val context: Context) {
         portalId: String,
         defaultChatFlow: String,
     ) {
+        if (hublet.isBlank()) throw HubspotConfigError.MissingHubletID
+        if (portalId.isBlank()) throw HubspotConfigError.MissingPortalID
+        if (defaultChatFlow.isBlank()) throw HubspotConfigError.MissingDefaultChatFlow
+        HubspotEnvironment.from(environment) ?: throw HubspotConfigError.MissingEnvironment
+
         val config = HubspotConfig(
             environment = environment,
             hublet = hublet,
@@ -133,13 +159,15 @@ class HubspotManager private constructor(private val context: Context) {
             defaultChatFlow = defaultChatFlow,
         )
 
-        hubspotConfig = config
-        NetworkDependencies.configure(config)
+        synchronized(configureLock) {
+            hubspotConfig = config
+            NetworkDependencies.configure(config)
+        }
     }
 
     /**
      * Set the user identity token and email. These will be included when starting a chat session to identify the users.
-     * These values are only stored in memory and aren't persisted.
+     * These values are persisted on the device and aren't held in memory only.
      * These values are set when user use the setUserIdentity with passing email and token
      * @param token: The token from the identity api. Must not be empty.
      * @param email: The users email address, that matches the token. Must not be empty
@@ -158,10 +186,11 @@ class HubspotManager private constructor(private val context: Context) {
      **/
     @Throws(HubspotConfigError::class)
     fun chatURL(chatFlow: String? = null, pushData: PushNotificationChatData? = null): String {
-        val hublet = hubspotConfig?.hublet?.let { Hublet(it) } ?: throw HubspotConfigError.MissingHubletID
-        val portalId = hubspotConfig?.portalId ?: throw HubspotConfigError.MissingPortalID
-        val environment = hubspotConfig?.environment?.let { Environment(it) } ?: throw HubspotConfigError.MissingEnvironment
-        val defaultChatFlow = hubspotConfig?.defaultChatFlow
+        val config = hubspotConfig
+        val hublet = config?.hublet?.let { Hublet(it) } ?: throw HubspotConfigError.MissingHubletID
+        val portalId = config?.portalId ?: throw HubspotConfigError.MissingPortalID
+        val environment = config?.environment?.let { Environment(it) } ?: throw HubspotConfigError.MissingEnvironment
+        val defaultChatFlow = config?.defaultChatFlow
 
         val components = Uri.Builder()
             .scheme("https")
@@ -174,7 +203,7 @@ class HubspotManager private constructor(private val context: Context) {
             .appendQueryParameter("identificationToken", hubspotPref.token)
             .build()
 
-        chatUrl = if (!chatFlow.isNullOrEmpty()) {
+        val chatUrl = if (!chatFlow.isNullOrEmpty()) {
             components.buildUpon().appendQueryParameter(CHAT_FLOW_KEY, chatFlow).toString()
         } else if (pushData?.chatflow.isNullOrEmpty()) {
             components.buildUpon().appendQueryParameter(CHAT_FLOW_KEY, defaultChatFlow).toString()
@@ -286,14 +315,18 @@ class HubspotManager private constructor(private val context: Context) {
      * @suppress("NOT_DOCUMENTED")
      */
     companion object {
+
+        @Volatile
         private var INSTANCE: HubspotManager? = null
+
+        private val instanceLock = Any()
 
         @JvmStatic
         fun getInstance(context: Context): HubspotManager {
-            if (INSTANCE == null) {
-                INSTANCE = HubspotManager(context)
+            INSTANCE?.let { return it }
+            return synchronized(instanceLock) {
+                INSTANCE ?: HubspotManager(context.applicationContext).also { INSTANCE = it }
             }
-            return INSTANCE!!
         }
 
         /**

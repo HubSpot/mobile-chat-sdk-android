@@ -9,7 +9,6 @@ package com.hubspot.mobilesdk.errorhandling
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-//Todo:Need to update this class based on response error body
 /**
  * Internal data class to represent HttpException error content
  */
