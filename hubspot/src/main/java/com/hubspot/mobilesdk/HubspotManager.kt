@@ -45,6 +45,7 @@ class HubspotManager private constructor(private val context: Context) {
     private var hubspotConfig: HubspotConfig? = null
 
     private val configureLock = Any()
+    private val logsLock = Any()
 
     private var chatProperties: HashMap<String, String> = HashMap()
     private val hubspotPref = PreferenceHelper(context)
@@ -73,22 +74,26 @@ class HubspotManager private constructor(private val context: Context) {
      * Enable the logs.
      **/
     fun enableLogs() {
-        if (loggingTree != null) return
-        val tree = object : Timber.DebugTree() {
-            override fun createStackElementTag(element: StackTraceElement) =
-                "(${element.fileName}:${element.lineNumber})"
+        synchronized(logsLock) {
+            if (loggingTree != null) return
+            val tree = object : Timber.DebugTree() {
+                override fun createStackElementTag(element: StackTraceElement) =
+                    "(${element.fileName}:${element.lineNumber})"
+            }
+            loggingTree = tree
+            Timber.plant(tree)
         }
-        loggingTree = tree
-        Timber.plant(tree)
     }
 
     /**
      * Disable the logs.
      **/
     fun disableLogs() {
-        loggingTree?.let {
-            Timber.uproot(it)
-            loggingTree = null
+        synchronized(logsLock) {
+            loggingTree?.let {
+                Timber.uproot(it)
+                loggingTree = null
+            }
         }
     }
 
