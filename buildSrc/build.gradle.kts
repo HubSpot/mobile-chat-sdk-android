@@ -34,6 +34,8 @@ repositories {
                 }
             }
         }
+    } else {
+        // Keep public builds usable outside HubSpot/Blazar.
+        mavenCentral()
     }
-    mavenCentral()
 }

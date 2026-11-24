@@ -52,9 +52,11 @@ buildscript {
                     }
                 }
             }
+        } else {
+            // Keep public builds usable outside HubSpot/Blazar.
+            mavenCentral()
         }
         google()
-        mavenCentral()
         gradlePluginPortal()
     }
     dependencies {
