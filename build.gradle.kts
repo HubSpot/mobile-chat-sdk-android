@@ -52,10 +52,12 @@ buildscript {
                     }
                 }
             }
+        } else {
+            // Keep public builds usable outside HubSpot/Blazar.
+            google()
+            mavenCentral()
+            gradlePluginPortal()
         }
-        google()
-        mavenCentral()
-        gradlePluginPortal()
     }
     dependencies {
         classpath(libs.dokka.base)

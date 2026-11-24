@@ -31,10 +31,12 @@ pluginManagement {
                     }
                 }
             }
+        } else {
+            // Keep public builds usable outside HubSpot/Blazar.
+            google()
+            mavenCentral()
+            gradlePluginPortal()
         }
-        google()
-        mavenCentral()
-        gradlePluginPortal()
     }
 }
 
@@ -71,9 +73,11 @@ dependencyResolutionManagement {
                     }
                 }
             }
+        } else {
+            // Keep public builds usable outside HubSpot/Blazar.
+            google()
+            mavenCentral()
         }
-        google()
-        mavenCentral()
     }
 }
 
